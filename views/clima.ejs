@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clima</title>
+</head>
+<body>
+    <h1>Consulta el clima</h1>
+
+    <form action="/clima" method="POST">
+        <label for="fecha">Fecha:</label>
+        <input type="date" id="fecha" name="fecha">
+        <input type="submit" value="Buscar">
+    </form>
+    
+    <div id="resultado">
+        <% if (clima) { %>
+            <p>Temperatura: <%= clima.temperatura %>°C</p>
+            <p>Humedad: <%= clima.humedad %>%</p>
+        <% } else { %>
+            <p>No se encontró el clima para la fecha proporcionada</p>
+        <% } %>
+    </div>
+</body>
+</html>
