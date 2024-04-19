@@ -9,14 +9,14 @@ router.get('/', function(req, res, next) {
 
 //Renderiza la vista clima.ejs
 router.get('/clima', function(req, res, next) {
-  res.render('clima', {title: 'Clima'}); 
+  res.render('clima', {title: 'Clima', clima: null}); 
 });
 
 router.post('/clima', async (req, res) => {
   try {
       const {fecha } = req.body;
       const clima = await obtenerClimaPorFecha(fecha);
-      res.render('clima', { clima });
+      res.render('clima', { title: 'Clima', clima });
   } catch (error) {
       res.status(500).send(error.message);
   }

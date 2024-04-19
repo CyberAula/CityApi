@@ -6,10 +6,10 @@
 <body>
     <h1>Consulta el clima</h1>
 
-    <form action="/clima" method="POST">
+    <form action="/clima" method="post">
         <label for="fecha">Fecha:</label>
-        <input type="date" id="fecha" name="fecha">
-        <input type="submit" value="Buscar">
+        <input type="date" id="fecha" name="fecha" required>
+        <input type="submit" value="Enviar">
     </form>
     
     <div id="resultado">

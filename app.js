@@ -15,8 +15,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.json()); // para solicitudes con Content-Type: application/json
+app.use(express.urlencoded({ extended: true })); // para solicitudes con Content-Type: application/x-www-form-urlencoded
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -28,15 +28,16 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
+//conexión a la BBDD MongoDB
+mongoose.connect('mongodb://localhost/LEGOCity', { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('Conexión a MongoDB exitosa'))
+    .catch(err => console.error('No se pudo conectar a MongoDB', err));
+
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
+  // maneja el error de alguna manera, por ejemplo:
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error', { error: err });
 });
 
 module.exports = app;

@@ -1,11 +1,16 @@
-
 const mongoose = require('mongoose');
 const Clima = require('../models/Clima');
 
 exports.obtenerClimaPorFecha = async (req, res, next) => {
     try {
-        const {fecha} = req.body;
-        const clima = await Clima.findOne({where: {fecha: fecha}});
+        if (!req.body || !req.body.fecha) {
+            console.log('Error: No se proporcionó una fecha.');
+            return;
+        }
+
+        const { fecha } = req.body;
+        const clima = await Clima.findOne({ fecha: fecha });
+
         if (clima) {
             res.locals.clima = clima;
         } else {
@@ -15,5 +20,7 @@ exports.obtenerClimaPorFecha = async (req, res, next) => {
         console.log('Error: ' + error.message);
     }
 
-    next();
+    if (typeof next === 'function') {
+        next();
+    }
 };
