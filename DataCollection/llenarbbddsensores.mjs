@@ -16,6 +16,7 @@ db.once('open', function() {
 
 
 const temperatureSchema = new mongoose.Schema({ 
+  index: Number,
   sensor_id: Number,
   temperature: Number,
   humidity: Number,
@@ -28,6 +29,7 @@ const Temperatura = mongoose.model('Temperatura', temperatureSchema);
 
 
 const VientoSchema = new mongoose.Schema({
+  index: Number,
   velocidad: Number,
   direccion: String,
   date: Date
@@ -41,6 +43,7 @@ async function insertarMultiTemperatura() {
   var newDoc;
   for (var i = 0; i < total; i++) {
     newDoc = { 
+      index: i,
       sensor_id: faker.number.int({ max: 99999 }),
       temperature: faker.number.float({ min: -20, max: 40, precision: 0.1}),
       humidity: faker.number.float({ min: 0, max: 100, precision: 0.1 }),
@@ -66,6 +69,7 @@ async function insertarMultiViento() {
   var newDoc;
   for (var i = 0; i < total; i++) {
     newDoc = { 
+      index: i,
       velocidad: faker.number.float({ min: 0, max: 100, precision: 0.01 }),
       direccion: faker.helpers.arrayElement(['Norte', 'Noreste', 'Este', 'Sureste', 'Sur', 'Suroeste', 'Oeste', 'Noroeste']),
       date: faker.date.recent()
