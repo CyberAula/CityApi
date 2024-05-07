@@ -6,4 +6,8 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'LEGO City' });
 });
 
+
+
 module.exports = router;
+
+

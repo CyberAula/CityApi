@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var path = require('path');
 var fs = require('fs');
+var createError = require('http-errors');
+
 
 // Ruta al archivo JSON de sensores
 var sensoresFilePath = path.join(__dirname, '../DataCollection', 'sensores.json');
@@ -21,26 +23,6 @@ router.get('/city/sensores', function(req, res, next) {
       res.json(sensoresData);
     } catch (parseError) {
       // Si hay un error al parsear el JSON, envía un error 500
-      return next(parseError);
-    }
-  });
-});
-
-router.get('/city/sensores/:id', function(req, res, next) {
-  fs.readFile(sensoresFilePath, 'utf8', function(err, data) {
-    if (err) {
-      return next(err);
-    }
-    try {
-      var sensoresData = JSON.parse(data);
-      var id = parseInt(req.params.id, 10);
-      var sensor = sensoresData.find(sensor => sensor.index === id);
-      if (sensor) {
-        res.json(sensor);
-      } else {
-        next(createError(404));
-      }
-    } catch (parseError) {
       return next(parseError);
     }
   });

@@ -7,15 +7,13 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var tempRouter = require('./routes/temp');
-var windRouter = require('./routes/wind');
+var tempwindRouter = require('./routes/temp&wind');
 var sensoresRouter = require('./routes/sensores');
 
 var app = express();
 
 // Conexión a la base de datos
-mongoose.connect('mongodb://0.0.0.0/Sensor', {
+mongoose.connect('mongodb://0.0.0.0/Sensores', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
@@ -42,9 +40,7 @@ app.listen(app.get('port'), function () {
 });
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/', tempRouter);
-app.use('/', windRouter);
+app.use('/', tempwindRouter);
 app.use('/', sensoresRouter);
 
 // catch 404 and forward to error handler

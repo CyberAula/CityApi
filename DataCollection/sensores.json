@@ -1,242 +1,32 @@
-[
-  {
-    "_id": "662e302ab96710bf25df2214",
-    "index": 0,
-    "sensorType": "humidity",
-    "localization": "Rivera, Tuvalu",
-    "altitude": 616.5,
-    "latitude": -87.324878,
-    "longitude": -96.049706,
-    "isActive": false,
-    "date": "2021-04-14T07:36:11 -02:00",
-    "model": "TE Connectivity"
-  },
-  {
-    "_id": "662e302affc05642f16fd6cb",
-    "index": 1,
-    "sensorType": "humidity",
-    "localization": "Mulberry, Slovak Republic",
-    "altitude": 915.32,
-    "latitude": -15.482183,
-    "longitude": 104.04084,
-    "isActive": true,
-    "date": "2017-06-29T12:58:46 -02:00",
-    "model": "Texas Instruments"
-  },
-  {
-    "_id": "662e302a06a19556ea3fa92c",
-    "index": 2,
-    "sensorType": "traffic lights state",
-    "localization": "Thynedale, Singapore",
-    "altitude": 235.62,
-    "latitude": -89.485367,
-    "longitude": -37.789736,
-    "isActive": false,
-    "date": "2022-05-29T12:14:51 -02:00",
-    "model": "TE Connectivity"
-  },
-  {
-    "_id": "662e302ac8c8c512279c8b0d",
-    "index": 3,
-    "sensorType": "temperature",
-    "localization": "Welch, Mongolia",
-    "altitude": 885.63,
-    "latitude": 10.051276,
-    "longitude": 37.965444,
-    "isActive": false,
-    "date": "2018-11-29T11:56:49 -01:00",
-    "model": "TE Connectivity"
-  },
-  {
-    "_id": "662e302a9c30dff6d645f336",
-    "index": 4,
-    "sensorType": "humidity",
-    "localization": "Broadlands, Sri Lanka",
-    "altitude": 456.91,
-    "latitude": 26.947307,
-    "longitude": -155.4372,
-    "isActive": true,
-    "date": "2014-08-14T11:20:08 -02:00",
-    "model": "Sony"
-  },
-  {
-    "_id": "662e302abcf7c1cf58e38077",
-    "index": 5,
-    "sensorType": "humidity",
-    "localization": "Troy, Korea (South)",
-    "altitude": 616.16,
-    "latitude": -8.769998,
-    "longitude": -58.545984,
-    "isActive": true,
-    "date": "2015-05-11T10:21:26 -02:00",
-    "model": "TE Connectivity"
-  },
-  {
-    "_id": "662e302ada930d067f320724",
-    "index": 6,
-    "sensorType": "energy",
-    "localization": "Garberville, Cyprus",
-    "altitude": 101.06,
-    "latitude": -70.284344,
-    "longitude": 94.938474,
-    "isActive": false,
-    "date": "2020-02-14T03:38:44 -01:00",
-    "model": "TE Connectivity"
-  },
-  {
-    "_id": "662e302aabed39b86bb47488",
-    "index": 7,
-    "sensorType": "temperature",
-    "localization": "Kilbourne, Tonga",
-    "altitude": 396.07,
-    "latitude": 35.846413,
-    "longitude": 71.182454,
-    "isActive": true,
-    "date": "2021-08-04T07:25:55 -02:00",
-    "model": "STMicroelectronics"
-  },
-  {
-    "_id": "662e302a6306c9313291e405",
-    "index": 8,
-    "sensorType": "humidity",
-    "localization": "Guthrie, Luxembourg",
-    "altitude": 554.35,
-    "latitude": 7.763181,
-    "longitude": -141.77178,
-    "isActive": true,
-    "date": "2023-06-25T01:48:29 -02:00",
-    "model": "STMicroelectronics"
-  },
-  {
-    "_id": "662e302ad6e2fb573c6aef9b",
-    "index": 9,
-    "sensorType": "traffic lights state",
-    "localization": "Salvo, Spain",
-    "altitude": 523.22,
-    "latitude": 50.000193,
-    "longitude": 177.712473,
-    "isActive": true,
-    "date": "2015-05-12T12:49:37 -02:00",
-    "model": "STMicroelectronics"
-  },
-  {
-    "_id": "662e302a038d03d412aa5801",
-    "index": 10,
-    "sensorType": "temperature",
-    "localization": "Homestead, New Zealand",
-    "altitude": 892.55,
-    "latitude": -57.184055,
-    "longitude": -94.123995,
-    "isActive": false,
-    "date": "2017-08-24T01:36:38 -02:00",
-    "model": "Bosch"
-  },
-  {
-    "_id": "662e302ae63a761894c6b4f1",
-    "index": 11,
-    "sensorType": "humidity",
-    "localization": "Gardiner, Saint Lucia",
-    "altitude": 54.63,
-    "latitude": -36.718537,
-    "longitude": -10.735049,
-    "isActive": false,
-    "date": "2018-01-10T04:23:25 -01:00",
-    "model": "Texas Instruments"
-  },
-  {
-    "_id": "662e302a34ff52b79548033d",
-    "index": 12,
-    "sensorType": "humidity",
-    "localization": "Levant, United Arab Emirates",
-    "altitude": 428.47,
-    "latitude": -43.147596,
-    "longitude": -176.068219,
-    "isActive": false,
-    "date": "2020-09-24T12:29:53 -02:00",
-    "model": "Bosch"
-  },
-  {
-    "_id": "662e302aa5603640ea7ae2de",
-    "index": 13,
-    "sensorType": "humidity",
-    "localization": "Richford, El Salvador",
-    "altitude": 985.2,
-    "latitude": 27.407716,
-    "longitude": -35.419569,
-    "isActive": false,
-    "date": "2017-12-22T05:57:28 -01:00",
-    "model": "TE Connectivity"
-  },
-  {
-    "_id": "662e302a77b273e6d8da33f0",
-    "index": 14,
-    "sensorType": "humidity",
-    "localization": "Sisquoc, East Timor",
-    "altitude": 520.6,
-    "latitude": -11.202929,
-    "longitude": -177.21763,
-    "isActive": true,
-    "date": "2023-07-15T06:51:27 -02:00",
-    "model": "TE Connectivity"
-  },
-  {
-    "_id": "662e302a753b7b3258ce3e1c",
-    "index": 15,
-    "sensorType": "energy",
-    "localization": "Ogema, Botswana",
-    "altitude": 56.87,
-    "latitude": -28.201532,
-    "longitude": 73.392874,
-    "isActive": true,
-    "date": "2018-07-23T12:33:11 -02:00",
-    "model": "Siemens"
-  },
-  {
-    "_id": "662e302ac246010f07fd1bbf",
-    "index": 16,
-    "sensorType": "wind speed",
-    "localization": "Delco, Benin",
-    "altitude": 374.13,
-    "latitude": 47.183881,
-    "longitude": 130.005352,
-    "isActive": true,
-    "date": "2016-07-11T05:55:58 -02:00",
-    "model": "Texas Instruments"
-  },
-  {
-    "_id": "662e302aad5be062bd6b48b6",
-    "index": 17,
-    "sensorType": "temperature",
-    "localization": "Yogaville, Burkina Faso",
-    "altitude": 383.67,
-    "latitude": -58.929627,
-    "longitude": -156.589837,
-    "isActive": false,
-    "date": "2020-06-22T04:22:06 -02:00",
-    "model": "Sony"
-  },
-  {
-    "_id": "662e302ad8d9ff7352ad81cb",
-    "index": 18,
-    "sensorType": "street lights state",
-    "localization": "Muse, St. Pierre and Miquelon",
-    "altitude": 614.46,
-    "latitude": -61.901694,
-    "longitude": 17.295145,
-    "isActive": false,
-    "date": "2022-09-13T07:19:17 -02:00",
-    "model": "Texas Instruments"
-  },
-  {
-    "_id": "662e302aaf7235c985999a05",
-    "index": 19,
-    "sensorType": "wind speed",
-    "localization": "Cressey, Papua New Guinea",
-    "altitude": 255.54,
-    "latitude": 38.352372,
-    "longitude": 16.322314,
-    "isActive": true,
-    "date": "2022-10-30T10:19:59 -01:00",
-    "model": "TE Connectivity"
-  }
-]
+{
+    "sensores": [
+        {
+            "index": "1",
+            "name": "Sensor temperatura este",
+            "desc": "Este sensor mide la temperatura en el este de la ciudad",
+            "sensorType": "temperatura",
+            "linkDoc": "",
+            "exampleQuery": "http://localhost:3000/city/temperatura/1?desde=2024-05-06T22:53:14.205Z&hasta=2024-05-07T01:12:15.758Z",
+            "visible": "true"
+        },
+        {
+            "index": "2",
+            "name": "Sensor viento molino",
+            "desc": "Este sensor recoge los datos del viento en el molino de la ciudad",
+            "sensorType": "viento",
+            "linkDoc": "",
+            "exampleQuery": "http://localhost:3000/city/viento/2?desde=2024-05-06T17:30:22.479Z&hasta=2024-05-07T02:34:10.469Z",
+            "visible": "true"
+        },
+        {
+            "index": "3",
+            "name": "Sensor temperatura oeste",
+            "desc": "Este sensor mide la temperatura en el oeste de la ciudad",
+            "sensorType": "temperatura",
+            "linkDoc": "",
+            "exampleQuery": "http://localhost:3000/city/temperatura/3?desde=2024-05-06T15:09:59.059Z&hasta=2024-05-06T18:44:32.529Z",
+            "visible": "true"
+        }
+
+    ]
+}
