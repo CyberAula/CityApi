@@ -7,6 +7,7 @@ var moment = require('moment');
 var fs = require('fs');
 var path = require('path');
 
+//esquema de los datos de la temperatura
 const temperatureSchema = new mongoose.Schema({ 
   sensor_name: String,
   temperature: Number,
@@ -18,24 +19,25 @@ const temperatureSchema = new mongoose.Schema({
 
 const TemperaturaEste = mongoose.model('TemperaturaEste', temperatureSchema);
 
+//devuelve todas las temperaturas registradas por el sensor en el este.
 router.get('/city/temperaturaEste', async function (req, res, next) {
   try {
-    // Consultar los datos de viento en la base de datos
     var temperaturaestes = await TemperaturaEste.find({});
-    console.log(temperaturaestes); // Añade esta línea
-    res.json(temperaturaestes); // Enviar los datos de viento como respuesta
+    console.log(temperaturaestes); 
+    res.json(temperaturaestes); 
   } catch (error) {
-    console.error(error); // Añade esta línea
-    next(error); // Pasar el error al siguiente middleware
+    console.error(error); 
+    next(error); 
   }
 });
 
 const TemperaturaOeste = mongoose.model('TemperaturaOeste', temperatureSchema);
 
+//devuelve todas las temperaturas registradas por el sensor en el oeste.
 router.get('/city/temperaturaOeste', async function (req, res, next) {
   try {
     var temperaturaoestes = await TemperaturaOeste.find({});
-    console.log(temperaturaoestes); // Agregar este registro para verificar los datos
+    console.log(temperaturaoestes); 
     res.json(temperaturaoestes);
   } catch (error) {
     console.error(error);
@@ -43,7 +45,7 @@ router.get('/city/temperaturaOeste', async function (req, res, next) {
   }
 });
 
-// Definir el esquema de los datos de viento
+//esquema de los datos de viento
 const VientoSchema = new mongoose.Schema({
   sensor_name: String,
   velocidad: Number,
@@ -53,6 +55,7 @@ const VientoSchema = new mongoose.Schema({
 
 const Viento = mongoose.model('Viento', VientoSchema);
 
+//ruta al archivo sensores.json
 var sensoresFilePath = path.join(__dirname, '../DataCollection', 'sensores.json');
 
 router.get('/city/:sensorType/:index', async (req, res, next) => {
@@ -70,23 +73,20 @@ router.get('/city/:sensorType/:index', async (req, res, next) => {
           // Encuentra el sensor con el tipo y el índice especificados
           var sensor = sensoresData.find(sensor => sensor.sensorType === sensorType && sensor.index === index);
           if (sensor) {
-            // Si se encuentra el sensor, devuelve sus datos
             res.json(sensor);
           } else {
-            // Si no se encuentra el sensor, devuelve un error 404
             next(createError(404));
           }
         } catch (parseError) {
-          // Si hay un error al parsear el JSON, devuelve un error 500
           return next(parseError);
         }
       });
     } else {
-      // Aquí va el código para manejar la consulta de datos del sensor
+
       let desde = moment(req.query.desde);
       let hasta = moment(req.query.hasta);
 
-      // Validar las fechas
+      //validar las fechas
       if (!desde.isValid() || !hasta.isValid()) {
         throw new Error('Las fechas proporcionadas son inválidas');
       }
@@ -94,9 +94,9 @@ router.get('/city/:sensorType/:index', async (req, res, next) => {
       desde = desde.toDate();
       hasta = hasta.toDate();
 
-      // Determinar el nombre del sensor basado en el tipo de sensor y el índice
+      //determinar el nombre del sensor basado en el tipo de sensor y el índice
       let sensor_name;
-      let sensorData; // Declarar sensorData aquí
+      let sensorData;
       if (req.params.sensorType === 'temperatura' && req.params.index === '1') {
         sensor_name = 'Sensor temperatura este';
         sensorData = await TemperaturaEste.find({

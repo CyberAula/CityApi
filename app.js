@@ -30,8 +30,8 @@ app.set('view engine', 'ejs');
 app.set('port', process.env.PORT || 3000);
 
 app.use(logger('dev'));
-app.use(express.json()); // para solicitudes con Content-Type: application/json
-app.use(express.urlencoded({ extended: true })); // para solicitudes con Content-Type: application/x-www-form-urlencoded
+app.use(express.json()); 
+app.use(express.urlencoded({ extended: true })); 
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
