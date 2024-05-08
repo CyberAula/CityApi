@@ -1,6 +1,6 @@
-// vientoController.js
 var Viento = require('../models/Viento.js');
 
+//función que obtiene los datos de viento para una dirección específica
 exports.getDireccion = async (req, res, next) => {
     try {
         let direccion = req.query.direccion;

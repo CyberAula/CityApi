@@ -1,6 +1,7 @@
 var TemperaturaEste = require('../models/TemperaturaEste.js');
 var TemperaturaOeste = require('../models/TemperaturaOeste.js');
 
+//función para obtener la temperatura de la zona este
 exports.getTemperaturaEste = async function (req, res, next) {
   try {
     var temperaturaestes = await TemperaturaEste.find({});
@@ -12,6 +13,7 @@ exports.getTemperaturaEste = async function (req, res, next) {
   }
 };
 
+//función para obtener la temperatura de la zona oeste
 exports.getTemperaturaOeste = async function (req, res, next) {
   try {
     var temperaturaoestes = await TemperaturaOeste.find({});
@@ -23,6 +25,7 @@ exports.getTemperaturaOeste = async function (req, res, next) {
   }
 };
 
+//función para obtener la temperatura de un sensor específico en un rango
 exports.getTemperaturaInRange = async function (req, res, next) {
     try {
     let min = parseFloat(req.query.min);
@@ -55,6 +58,7 @@ exports.getTemperaturaInRange = async function (req, res, next) {
   }
 };
 
+//función para obtener la temperatura mínima de un sensor específico
 exports.getTemperaturaMin = async function (req, res, next) {
     try {
       let index = req.params.index;
@@ -78,6 +82,7 @@ exports.getTemperaturaMin = async function (req, res, next) {
     }
 };
 
+//función para obtener la temperatura máxima de un sensor específico
 exports.getTemperaturaMax = async function (req, res, next) {
     try {
       let index = req.params.index;

@@ -3,17 +3,20 @@ var path = require('path');
 var moment = require('moment');
 var createError = require('http-errors');
 
+//ruta al archivo sensores.json
 var sensoresFilePath = path.join(__dirname, '../DataCollection', 'sensores.json');
 
+//rutas a los modelos
 var TemperaturaEste = require('../models/TemperaturaEste.js');
 var TemperaturaOeste = require('../models/TemperaturaOeste.js');
 var Viento = require('../models/Viento.js');
 var TrenFrecuencia = require('../models/TrenFrecuencia.js');
 
+//rutas a los controladores
 var vientoController = require('./vientoController.js');
 var tempController = require('./tempController.js');
 
-
+//función para obtener los datos de los sensores
 exports.getSensoresData = (req, res, next) => {
     fs.readFile(sensoresFilePath, 'utf8', function (err, data) {
         if (err) {
@@ -28,6 +31,7 @@ exports.getSensoresData = (req, res, next) => {
     });
 }
 
+//función para obtener los datos de un sensor específico y por rango de fechas
 exports.getDateData = async (req, res, next) => {
     try {
         //si no se proporcionan las fechas 'desde' y 'hasta', devuelve la información del sensor

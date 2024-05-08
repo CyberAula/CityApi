@@ -1,5 +1,6 @@
 var TrenFrecuencia = require('../models/TrenFrecuencia.js');
 
+//función para obtener todos los datos de los trenes
 exports.getTrenFrecuencias = async function (req, res, next) {
     try {
       var trenfrecuencias = await TrenFrecuencia.find({});
@@ -11,6 +12,7 @@ exports.getTrenFrecuencias = async function (req, res, next) {
     }
 };
 
+//función para obtener los datos de un tren específico y por rango de frecuencias
 exports.getTrenFrecuenciasMayorQue = async function (req, res, next) {
     try {
         let query = {};
