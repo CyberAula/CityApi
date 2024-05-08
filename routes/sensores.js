@@ -1,24 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var path = require('path');
-var fs = require('fs');
-var createError = require('http-errors');
 
-//ruta al archivo sensores.json
-var sensoresFilePath = path.join(__dirname, '../DataCollection', 'sensores.json');
+var sensorController = require('../controllers/sensoresController.js');
 
-router.get('/city/sensores', function(req, res, next) {
-  fs.readFile(sensoresFilePath, 'utf8', function(err, data) {
-    if (err) {
-      return next(err);
-    }
-    try {
-      var sensoresData = JSON.parse(data);
-      res.json(sensoresData);
-    } catch (parseError) {
-        return next(parseError);
-    }
-  });
-});
+router.get('/city/sensores', sensorController.getSensoresData);
+router.get('/city/:sensorType/:index', sensorController.getDateData);
 
 module.exports = router;

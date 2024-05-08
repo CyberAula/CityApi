@@ -7,7 +7,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var indexRouter = require('./routes/index');
-var tempwindRouter = require('./routes/temp&wind');
+var tempRouter = require('./routes/temp');
 var sensoresRouter = require('./routes/sensores');
 
 var app = express();
@@ -40,7 +40,7 @@ app.listen(app.get('port'), function () {
 });
 
 app.use('/', indexRouter);
-app.use('/', tempwindRouter);
+app.use('/', tempRouter);
 app.use('/', sensoresRouter);
 
 // catch 404 and forward to error handler
