@@ -1,8 +1,28 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+.titulo {
+  font-family: "Kanit", sans-serif;
+  font-weight: 500;
+  font-size:xx-large;
+  font-style: normal;
+  text-align: center;
+}
+
+.subtitulo {
+  font-family: "Kanit", sans-serif;
+  font-weight: 300;
+  font-size: x-large;
+  font-style: normal;
+  text-align: center;
+}
+
+.iframe-container {
+  display: flex;
+  justify-content: center;
 }
