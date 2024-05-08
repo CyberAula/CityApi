@@ -35,7 +35,7 @@ exports.getSensoresData = (req, res, next) => {
 exports.getDateData = async (req, res, next) => {
     try {
         //si no se proporcionan las fechas 'desde' y 'hasta', devuelve la información del sensor
-        if (!req.query.desde && !req.query.hasta && !req.query.direccion && !req.query.min && !req.query.max) {
+        if (!req.query.desde && !req.query.hasta && !req.query.direccion && !req.query.min && !req.query.max && !req.query.mayorque && !req.query.menorque) {
             fs.readFile(sensoresFilePath, 'utf8', function (err, data) {
                 if (err) {
                     return next(err);
@@ -58,6 +58,12 @@ exports.getDateData = async (req, res, next) => {
 
         } else if (req.query.direccion) {
             return await vientoController.getDireccion(req, res, next);
+        } else if (req.query.mayorque !== undefined && req.query.menorque !== undefined) {
+                return await vientoController.getVientosEntre(req, res, next);
+        } else if (req.query.mayorque !== undefined) {
+            return await vientoController.getVientosMayorQue(req, res, next);
+        } else if (req.query.menorque !== undefined) {
+            return await vientoController.getVientosMenorQue(req, res, next);
         } else if (req.query.min !== undefined && req.query.max !== undefined) {
             return await tempController.getTemperaturaInRange(req, res, next);
         } else if (req.query.min !== undefined) {

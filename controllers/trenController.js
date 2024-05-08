@@ -12,7 +12,7 @@ exports.getTrenFrecuencias = async function (req, res, next) {
     }
 };
 
-//función para obtener los datos de un tren específico y por rango de frecuencias
+//función para obtener los datos de un tren específico y por rango inferior
 exports.getTrenFrecuenciasMayorQue = async function (req, res, next) {
     try {
         let query = {};
@@ -38,6 +38,7 @@ exports.getTrenFrecuenciasMayorQue = async function (req, res, next) {
     }
 };
 
+//función para obtener los datos de un tren específico y por rango superior
 exports.getTrenFrecuenciasMenorQue = async function (req, res, next) {
     try {
         let query = {};
