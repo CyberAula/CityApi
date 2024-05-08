@@ -9,6 +9,9 @@ var TemperaturaEste = require('../models/TemperaturaEste.js');
 var TemperaturaOeste = require('../models/TemperaturaOeste.js');
 var Viento = require('../models/Viento.js');
 
+var vientoController = require('./vientoController.js');
+var tempController = require('./tempController.js');
+
 exports.getSensoresData = (req, res, next) => {
     fs.readFile(sensoresFilePath, 'utf8', function(err, data) {
         if (err) {
@@ -26,7 +29,7 @@ exports.getSensoresData = (req, res, next) => {
 exports.getDateData = async (req, res, next) => {
     try {
         //si no se proporcionan las fechas 'desde' y 'hasta', devuelve la información del sensor
-        if (!req.query.desde && !req.query.hasta) {
+        if (!req.query.desde && !req.query.hasta && !req.query.direccion && !req.query.min && !req.query.max) {
           fs.readFile(sensoresFilePath, 'utf8', function(err, data) {
             if (err) {
               return next(err);
@@ -46,6 +49,11 @@ exports.getDateData = async (req, res, next) => {
               return next(parseError);
             }
           });
+
+        } else if (req.query.direccion) {
+            return await vientoController.getWindDataByDirection(req, res, next);
+        } else if (req.query.min !== undefined || req.query.max !== undefined) {
+            return await tempController.getTemperaturaInRange(req, res, next);
         } else {
     
           let desde = moment(req.query.desde);

@@ -24,7 +24,7 @@ exports.getTemperaturaOeste = async function (req, res, next) {
 };
 
 exports.getTemperaturaInRange = async function (req, res, next) {
-  try {
+    try {
     let min = parseFloat(req.query.min);
     let max = parseFloat(req.query.max);
     let index = req.params.index;
