@@ -28,7 +28,17 @@
             "exampleQueryDateRange": "/city/temperatura/3?desde=2024-05-06T15:09:59.059Z&hasta=2024-05-06T18:44:32.529Z",
             "exampleQueryTempRange": "/city/temperatura/3?min=5.0&max=21",
             "visible": "true"
+        },
+        {
+            "index": "4",
+            "name": "Sensor frecuencia tren",
+            "desc": "Este sensor recoge los datos de la frecuencia con la que el tren pasó por la estación por la mañana, la tarde y la noche",
+            "sensorType": "trenfrecuencia",
+            "linkDoc": "",
+            "exampleQueryDateRange": "/city/trenfrecuencia/4?desde=2024-05-06T15:09:59.059Z&hasta=2024-05-06T18:44:32.529Z",
+            "exampleQuery":"/city/trenfrecuencia",
+            "exampleQueryrangos":"/city/trenfrecuencia/4/menorque?frecMañana=10",
+            "visible": "true"
         }
-
     ]
 }

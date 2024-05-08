@@ -88,7 +88,7 @@ const Viento = mongoose.model('Viento', VientoSchema);
 
 async function insertarMultiViento() {
   var multiDoc = [];
-  const total = 30;
+  const total = 50;
   var newDoc;
   for (var i = 0; i < total; i++) {
     newDoc = { 
@@ -108,5 +108,44 @@ insertarMultiViento()
    process.exit();
 }).catch(err => {
    console.error("ERROR VIENTO", err);
+   process.exit();
+});
+
+const trenFrecuenciaSchema = new mongoose.Schema({
+  sensor_name: String,
+  frecMañana: Number,
+  frecTarde: Number,
+  frecNoche: Number,
+  date: Date
+}, { versionKey: false });
+
+const TrenFrecuencia = mongoose.model('TrenFrecuencia', trenFrecuenciaSchema);
+
+async function insertarMultiTren() {
+  var multiDoc = [];
+  const total = 30;
+  var newDoc;
+  for (var i = 0; i < total; i++) {
+    let frecMañana = faker.number.int({ min: 2, max: 10});
+    let frecTarde = faker.number.int({ min: 2, max: 10});
+    let frecNoche = faker.number.int({ min: Math.max(frecMañana, frecTarde) + 1, max: 20});
+    newDoc = { 
+      sensor_name: "Sensor frecuencia tren",
+      frecMañana: frecMañana,
+      frecTarde: frecTarde,
+      frecNoche: frecNoche,
+      date: faker.date.recent()
+    };
+    multiDoc.push(newDoc);
+  }
+  return TrenFrecuencia.insertMany(multiDoc);
+}
+
+insertarMultiTren()
+ .then(v => {
+   console.log("RESULTADO TREN:", v);
+   process.exit();
+}).catch(err => {
+   console.error("ERROR TREN", err);
    process.exit();
 });

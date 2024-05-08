@@ -10,6 +10,7 @@ var indexRouter = require('./routes/index');
 var sensoresRouter = require('./routes/sensores');
 var tempRouter = require('./routes/temp');
 var vientoRouter = require('./routes/viento');
+var trenRouter = require('./routes/tren');
 
 var app = express();
 
@@ -44,6 +45,7 @@ app.use('/', indexRouter);
 app.use('/', sensoresRouter);
 app.use('/', tempRouter);
 app.use('/', vientoRouter);
+app.use('/', trenRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

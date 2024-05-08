@@ -1,7 +1,7 @@
 // vientoController.js
 var Viento = require('../models/Viento.js');
 
-exports.getWindDataByDirection = async (req, res, next) => {
+exports.getDireccion = async (req, res, next) => {
     try {
         let direccion = req.query.direccion;
 
