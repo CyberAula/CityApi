@@ -52,8 +52,12 @@ exports.getDateData = async (req, res, next) => {
 
         } else if (req.query.direccion) {
             return await vientoController.getWindDataByDirection(req, res, next);
-        } else if (req.query.min !== undefined || req.query.max !== undefined) {
+        } else if (req.query.min !== undefined && req.query.max !== undefined) {
             return await tempController.getTemperaturaInRange(req, res, next);
+        } else if (req.query.min !== undefined) {
+            return await tempController.getTemperaturaMin(req, res, next);
+        } else if (req.query.max !== undefined) {
+            return await tempController.getTemperaturaMax(req, res, next);
         } else {
     
           let desde = moment(req.query.desde);

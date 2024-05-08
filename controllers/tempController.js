@@ -54,3 +54,49 @@ exports.getTemperaturaInRange = async function (req, res, next) {
     next(error); 
   }
 };
+
+exports.getTemperaturaMin = async function (req, res, next) {
+    try {
+      let index = req.params.index;
+  
+      let Model;
+      if (index === '1') {
+        Model = TemperaturaEste;
+      } else if (index === '3') {
+        Model = TemperaturaOeste;
+      } else {
+        throw new Error('El índice proporcionado es inválido');
+      }
+  
+      var temperaturaMin = await Model.findOne().sort({temperature: 1});
+  
+      console.log(temperaturaMin); 
+      res.json(temperaturaMin); 
+    } catch (error) {
+      console.error(error); 
+      next(error); 
+    }
+};
+
+exports.getTemperaturaMax = async function (req, res, next) {
+    try {
+      let index = req.params.index;
+  
+      let Model;
+      if (index === '1') {
+        Model = TemperaturaEste;
+      } else if (index === '3') {
+        Model = TemperaturaOeste;
+      } else {
+        throw new Error('El índice proporcionado es inválido');
+      }
+  
+      var temperaturaMax = await Model.findOne().sort({temperature: -1});
+  
+      console.log(temperaturaMax); 
+      res.json(temperaturaMax); 
+    } catch (error) {
+      console.error(error); 
+      next(error); 
+    }
+};
