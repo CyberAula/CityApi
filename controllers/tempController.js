@@ -22,3 +22,35 @@ exports.getTemperaturaOeste = async function (req, res, next) {
     next(error);
   }
 };
+
+exports.getTemperaturaInRange = async function (req, res, next) {
+  try {
+    let min = parseFloat(req.query.min);
+    let max = parseFloat(req.query.max);
+    let index = req.params.index;
+
+    // Validar los valores min y max
+    if (isNaN(min) || isNaN(max)) {
+      throw new Error('Los valores min y max proporcionados son inválidos');
+    }
+
+    let Model;
+    if (index === '1') {
+      Model = TemperaturaEste;
+    } else if (index === '3') {
+      Model = TemperaturaOeste;
+    } else {
+      throw new Error('La dirección proporcionada es inválida');
+    }
+
+    var temperaturas = await Model.find({
+      temperature: { $gte: min, $lte: max }
+    });
+
+    console.log(temperaturas); 
+    res.json(temperaturas); 
+  } catch (error) {
+    console.error(error); 
+    next(error); 
+  }
+};

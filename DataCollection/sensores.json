@@ -6,7 +6,8 @@
             "desc": "Este sensor mide la temperatura en el este de la ciudad",
             "sensorType": "temperatura",
             "linkDoc": "",
-            "exampleQuery": "http://localhost:3000/city/temperatura/1?desde=2024-05-06T22:53:14.205Z&hasta=2024-05-07T01:12:15.758Z",
+            "exampleQueryDateRange": "/city/temperatura/1?desde=2024-05-06T22:53:14.205Z&hasta=2024-05-07T01:12:15.758Z",
+            "exampleQueryTempRange": "/city/temperatura/1?min=5.0&max=21",
             "visible": "true"
         },
         {
@@ -15,7 +16,7 @@
             "desc": "Este sensor recoge los datos del viento en el molino de la ciudad",
             "sensorType": "viento",
             "linkDoc": "",
-            "exampleQuery": "http://localhost:3000/city/viento/2?desde=2024-05-06T17:30:22.479Z&hasta=2024-05-07T02:34:10.469Z",
+            "exampleQueryDateRange": "/city/viento/2?desde=2024-05-06T17:30:22.479Z&hasta=2024-05-07T02:34:10.469Z",
             "visible": "true"
         },
         {
@@ -24,7 +25,8 @@
             "desc": "Este sensor mide la temperatura en el oeste de la ciudad",
             "sensorType": "temperatura",
             "linkDoc": "",
-            "exampleQuery": "http://localhost:3000/city/temperatura/3?desde=2024-05-06T15:09:59.059Z&hasta=2024-05-06T18:44:32.529Z",
+            "exampleQueryDateRange": "/city/temperatura/3?desde=2024-05-06T15:09:59.059Z&hasta=2024-05-06T18:44:32.529Z",
+            "exampleQueryTempRange": "/city/temperatura/3?min=5.0&max=21",
             "visible": "true"
         }
 
