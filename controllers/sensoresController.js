@@ -34,8 +34,25 @@ exports.getSensoresData = (req, res, next) => {
 //función para obtener los datos de un sensor específico y por rango de fechas
 exports.getDateData = async (req, res, next) => {
     try {
+
+        const conditions = [
+            { check: () => req.query.direccion, action: () => vientoController.getDireccion(req, res, next) },
+            { check: () => req.query.mayorque !== undefined && req.query.menorque !== undefined, action: () => vientoController.getVientosEntre(req, res, next) },
+            { check: () => req.query.mayorque !== undefined, action: () => vientoController.getVientosMayorQue(req, res, next) },
+            { check: () => req.query.menorque !== undefined, action: () => vientoController.getVientosMenorQue(req, res, next) },
+            { check: () => req.query.min !== undefined && req.query.max !== undefined, action: () => tempController.getTemperaturaInRange(req, res, next) },
+            { check: () => req.query.min !== undefined, action: () => tempController.getTemperaturaMin(req, res, next) },
+            { check: () => req.query.max !== undefined, action: () => tempController.getTemperaturaMax(req, res, next) },
+        ];
+
+        for (let condition of conditions) {
+            if (condition.check()) {
+                return await condition.action();
+            }
+        }
+
         //si no se proporcionan las fechas 'desde' y 'hasta', devuelve la información del sensor
-        if (!req.query.desde && !req.query.hasta && !req.query.direccion && !req.query.min && !req.query.max && !req.query.mayorque && !req.query.menorque) {
+        if (!req.query.desde && !req.query.hasta) {
             fs.readFile(sensoresFilePath, 'utf8', function (err, data) {
                 if (err) {
                     return next(err);
@@ -44,7 +61,6 @@ exports.getDateData = async (req, res, next) => {
                     var sensoresData = JSON.parse(data).sensores;
                     var sensorType = req.params.sensorType;
                     var index = req.params.index;
-                    //encuentra el sensor con el tipo y el índice especificados
                     var sensor = sensoresData.find(sensor => sensor.sensorType === sensorType && sensor.index === index);
                     if (sensor) {
                         res.json(sensor);
@@ -55,21 +71,6 @@ exports.getDateData = async (req, res, next) => {
                     return next(parseError);
                 }
             });
-
-        } else if (req.query.direccion) {
-            return await vientoController.getDireccion(req, res, next);
-        } else if (req.query.mayorque !== undefined && req.query.menorque !== undefined) {
-                return await vientoController.getVientosEntre(req, res, next);
-        } else if (req.query.mayorque !== undefined) {
-            return await vientoController.getVientosMayorQue(req, res, next);
-        } else if (req.query.menorque !== undefined) {
-            return await vientoController.getVientosMenorQue(req, res, next);
-        } else if (req.query.min !== undefined && req.query.max !== undefined) {
-            return await tempController.getTemperaturaInRange(req, res, next);
-        } else if (req.query.min !== undefined) {
-            return await tempController.getTemperaturaMin(req, res, next);
-        } else if (req.query.max !== undefined) {
-            return await tempController.getTemperaturaMax(req, res, next);
         } else {
 
             let desde = moment(req.query.desde);

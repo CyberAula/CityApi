@@ -37,7 +37,7 @@
             "linkDoc": "",
             "exampleQueryDateRange": "/city/trenfrecuencia/4?desde=2024-05-06T15:09:59.059Z&hasta=2024-05-06T18:44:32.529Z",
             "exampleQuery":"/city/trenfrecuencia",
-            "exampleQueryrangos":"/city/trenfrecuencia/4/menorque?frecMañana=10",
+            "exampleQueryRangos":"/city/trenfrecuencia/4/menorque?frecMañana=10, /city/trenfrecuencia/4/mayorque?frecTarde=10",
             "visible": "true"
         }
     ]
