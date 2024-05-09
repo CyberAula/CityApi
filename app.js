@@ -13,6 +13,7 @@ var sensoresRouter = require('./routes/sensores');
 var tempRouter = require('./routes/temp');
 var vientoRouter = require('./routes/viento');
 var trenRouter = require('./routes/tren');
+const { type } = require('os');
 
 var app = express();
 
@@ -37,24 +38,68 @@ const options = {
     },
     components: {
       schemas: {
+        Sensores:{
+          type: 'object',
+          properties: {
+            index: {
+              type: 'string',
+              example: '3',
+              description: 'El índice del sensor'
+            },
+            name: {
+              type: 'string',
+              example: 'Sensor temperatura oeste',
+              description: 'El nombre del sensor'
+            },
+            desc: {
+              type: 'string',
+              example: 'Este sensor mide la temperatura en el oeste de la ciudad',
+              description: 'La descripción del sensor'
+            },
+            sensorType: {
+              type: 'string',
+              example: 'temperatura',
+              description: 'El tipo de sensor'
+            },
+            linkDoc: {
+              type: 'string',
+              example: '',
+              description: 'El enlace a la documentación del sensor'
+            },
+            exampleQueryDateRange: {
+              type: 'string',
+              example: '',
+              description: 'Ejemplo de consulta de rango de fechas'
+            },
+            visible: {
+              type: 'string',
+              example: 'true',
+              description: 'La visibilidad del sensor'
+            }
+          }
+        },
         TemperaturaEste: {
           type: 'object',
           properties: {
             sensor_name: {
               type: 'string',
+              example: 'Sensor temperatura este',
               description: 'El nombre del sensor'
             },
             temperature: {
               type: 'number',
+              example:'21.8',
               description: 'La temperatura en grados Celsius'
             },
             humidity: {
               type: 'number',
+              example:'71.3%',
               description: 'La humedad en porcentaje'
             },
             date: {
               type: 'string',
               format: 'date-time',
+              example:'2024-05-08T08:31:44.173Z',
               description: 'La fecha y hora cuando se tomaron los datos'
             }
           },
@@ -64,19 +109,23 @@ const options = {
           properties: {
             sensor_name: {
               type: 'string',
+              example:'Sensor temperatura oeste',
               description: 'El nombre del sensor'
             },
             temperature: {
               type: 'number',
+              example:'15.7',
               description: 'La temperatura en grados Celsius'
             },
             humidity: {
               type: 'number',
+              example:'31%',
               description: 'La humedad en porcentaje'
             },
             date: {
               type: 'string',
               format: 'date-time',
+              example:'2024-05-08T02:02:00.708Z',
               description: 'La fecha y hora cuando se tomaron los datos'
             }
           },
@@ -86,19 +135,23 @@ const options = {
           properties: {
             sensor_name: {
               type: 'string',
+              example:'Sensor viento molino',
               description: 'El nombre del sensor',
             },
             velocidad: {
               type: 'number',
+              example:'16.59',
               description: 'La velocidad del viento en km/h',
             },
             direccion: {
               type: 'string',
+              example: 'Oeste',
               description: 'La dirección del viento',
             },
             date: {
               type: 'string',
               format: 'date-time',
+              example:'2024-05-07T20:39:09.008Z',
               description: 'La fecha y hora cuando se tomaron los datos'
             },
           },
@@ -108,23 +161,28 @@ const options = {
           properties: {
               sensor_name: {
                   type: 'string',
+                  example:'Sensor frecuencia tren',
                   description: 'El nombre del sensor'
               },
               frecMañana: {
                   type: 'number',
+                  example:'2',
                   description: 'La frecuencia del tren por la mañana'
               },
               frecTarde: {
                   type: 'number',
+                  example:'3',
                   description: 'La frecuencia del tren por la tarde'
               },
               frecNoche: {
                   type: 'number',
+                  example:'8',
                   description: 'La frecuencia del tren por la noche'
               },
               date: {
                   type: 'string',
                   format: 'date-time',
+                  example:'2024-05-08T12:29:05.464Z',
                   description: 'La fecha y hora cuando se tomaron los datos'
               }
           },

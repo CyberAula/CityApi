@@ -7,6 +7,8 @@ var vientoController = require('../controllers/vientoController.js');
  * @swagger
  * /city/viento/{index}?direccion={direccion}:
  *   get:
+ *     tags:
+ *       - Viento
  *     summary: Devuelve los datos del viento para una dirección específica.
  *     description: "Ejemplo de uso: '/city/viento/2?direccion=Norte'"
  *     parameters:
@@ -37,6 +39,8 @@ router.get('/city/viento/:index', vientoController.getDireccion);
  * @swagger
  * /city/viento/{index}?mayorque={mayorque}&menorque={menorque}:
  *   get:
+ *     tags:
+ *       - Viento
  *     summary: Devuelve los datos del viento para un rango de velocidades.
  *     description: "Ejemplo de uso: '/city/viento/2?mayorque=30&menorque=60'"
  *     parameters:
@@ -72,6 +76,8 @@ router.get('/city/viento/:index', vientoController.getVientosEntre);
  * @swagger
  * /city/viento/{index}?mayorque={mayorque}:
  *   get:
+ *     tags:
+ *       - Viento
  *     summary: Devuelve los datos del viento para velocidades mayores a la especificada.
  *     description: "Ejemplo de uso: '/city/viento/2?mayorque=30'"
  *     parameters:
@@ -100,6 +106,8 @@ router.get('/city/viento/:index', vientoController.getVientosMayorQue);
  * @swagger
  * /city/viento/{index}?menorque={menorque}:
  *   get:
+ *     tags:
+ *       - Viento
  *     summary: Devuelve los datos del viento para velocidades menores a la especificada.
  *     description: "Ejemplo de uso: '/city/viento/2?menorque=60'"
  *     parameters:
