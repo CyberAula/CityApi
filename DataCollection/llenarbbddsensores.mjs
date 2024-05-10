@@ -34,7 +34,7 @@ async function insertarMultiTemperaturaEste() {
       sensor_name: "Sensor temperatura este",
       temperature: faker.number.float({ min: -20, max: 40, precision: 0.1}),
       humidity: faker.number.float({ min: 0, max: 100, precision: 0.1 }),
-      date: faker.date.recent()
+      date: faker.date.between({ from: '2020-01-01T00:00:00.000Z', to: '2025-01-01T00:00:00.000Z'})
     };
     multiDoc.push(newDoc);
   }
@@ -61,7 +61,7 @@ async function insertarMultiTemperaturaOeste() {
       sensor_name: "Sensor temperatura oeste",
       temperature: faker.number.float({ min: -20, max: 40, precision: 0.1}),
       humidity: faker.number.float({ min: 0, max: 100, precision: 0.1 }),
-      date: faker.date.recent()
+      date: faker.date.between({ from: '2020-01-01T00:00:00.000Z', to: '2025-01-01T00:00:00.000Z'})
     };
     multiDoc.push(newDoc);
   }
@@ -95,7 +95,7 @@ async function insertarMultiViento() {
       sensor_name: "Sensor viento molino",
       velocidad: faker.number.float({ min: 0, max: 100, precision: 0.01 }),
       direccion: faker.helpers.arrayElement(['Norte', 'Noreste', 'Este', 'Sureste', 'Sur', 'Suroeste', 'Oeste', 'Noroeste']),
-      date: faker.date.recent()
+      date: faker.date.between({ from: '2020-01-01T00:00:00.000Z', to: '2025-01-01T00:00:00.000Z'})
     };
     multiDoc.push(newDoc);
   }
@@ -134,7 +134,7 @@ async function insertarMultiTren() {
       frecMañana: frecMañana,
       frecTarde: frecTarde,
       frecNoche: frecNoche,
-      date: faker.date.recent()
+      date: faker.date.between({ from: '2020-01-01T00:00:00.000Z', to: '2025-01-01T00:00:00.000Z'})
     };
     multiDoc.push(newDoc);
   }

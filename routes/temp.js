@@ -60,7 +60,9 @@ router.get('/city/temperaturaOeste', temperatureController.getTemperaturaOeste);
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Temperatura'
+ *               oneOf:
+ *                 - $ref: '#/components/schemas/TemperaturaEste'
+ *                 - $ref: '#/components/schemas/TemperaturaOeste'
  */
 router.get('/city/temperatura/:index', temperatureController.getTemperaturaInRange);
 
@@ -85,7 +87,9 @@ router.get('/city/temperatura/:index', temperatureController.getTemperaturaInRan
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Temperatura'
+ *               oneOf:
+ *                 - $ref: '#/components/schemas/TemperaturaEste'
+ *                 - $ref: '#/components/schemas/TemperaturaOeste'
  */
 router.get('/city/temperatura/:index/min', temperatureController.getTemperaturaMin);
 
@@ -101,7 +105,7 @@ router.get('/city/temperatura/:index/min', temperatureController.getTemperaturaM
  *       - in: path
  *         name: index
  *         required: true
- *         description: Indica la zona en la que se mide la temperatura..
+ *         description: Indica la zona en la que se mide la temperatura.
  *         schema:
  *           type: integer
  *     responses:
@@ -110,7 +114,9 @@ router.get('/city/temperatura/:index/min', temperatureController.getTemperaturaM
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Temperatura'
+ *               oneOf:
+ *                 - $ref: '#/components/schemas/TemperaturaEste'
+ *                 - $ref: '#/components/schemas/TemperaturaOeste'
  */
 router.get('/city/temperatura/:index/max', temperatureController.getTemperaturaMax);
 
