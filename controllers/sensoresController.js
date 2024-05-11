@@ -20,6 +20,7 @@ var TraficoAfueras = require('../models/TraficoAfueras.js');
 //rutas a los controladores
 var vientoController = require('./vientoController.js');
 var tempController = require('./tempController.js');
+var traficoController = require('./traficoController.js');
 
 //función para obtener los datos de los sensores
 exports.getSensoresData = (req, res, next) => {
@@ -42,6 +43,7 @@ exports.getDateData = async (req, res, next) => {
 
         const conditions = [
             { check: () => req.query.direccion, action: () => vientoController.getDireccion(req, res, next) },
+            { check: () => req.query.congestion, action: () => traficoController.getCongestion(req, res, next)},
             { check: () => req.query.mayorque !== undefined && req.query.menorque !== undefined, action: () => vientoController.getVientosEntre(req, res, next) },
             { check: () => req.query.mayorque !== undefined, action: () => vientoController.getVientosMayorQue(req, res, next) },
             { check: () => req.query.menorque !== undefined, action: () => vientoController.getVientosMenorQue(req, res, next) },

@@ -97,6 +97,8 @@ router.get('/city/temperaturaOeste', temperaturaController.getTemperaturaOeste);
  *           application/json:
  *             schema:
  *               oneOf:
+ *                 - $ref: '#/components/schemas/TemperaturaNorte'
+ *                 - $ref: '#/components/schemas/TemperaturaSur'
  *                 - $ref: '#/components/schemas/TemperaturaEste'
  *                 - $ref: '#/components/schemas/TemperaturaOeste'
  */
@@ -124,6 +126,8 @@ router.get('/city/temperatura/:index', temperaturaController.getTemperaturaInRan
  *           application/json:
  *             schema:
  *               oneOf:
+ *                 - $ref: '#/components/schemas/TemperaturaNorte'
+ *                 - $ref: '#/components/schemas/TemperaturaSur'
  *                 - $ref: '#/components/schemas/TemperaturaEste'
  *                 - $ref: '#/components/schemas/TemperaturaOeste'
  */
@@ -151,6 +155,8 @@ router.get('/city/temperatura/:index/min', temperaturaController.getTemperaturaM
  *           application/json:
  *             schema:
  *               oneOf:
+ *                 - $ref: '#/components/schemas/TemperaturaNorte'
+ *                 - $ref: '#/components/schemas/TemperaturaSur'
  *                 - $ref: '#/components/schemas/TemperaturaEste'
  *                 - $ref: '#/components/schemas/TemperaturaOeste'
  */
