@@ -1,4 +1,4 @@
-// models/TemperaturaEste.js
+// models/TemperaturaSur.js
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
@@ -12,4 +12,4 @@ const temperaturaSchema = new mongoose.Schema({
      versionKey: false
 });
   
-module.exports = mongoose.model('TemperaturaEste', temperaturaSchema);
+module.exports = mongoose.model('TemperaturaSure', temperaturaSchema);

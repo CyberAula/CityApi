@@ -1,5 +1,31 @@
+var TemperaturaNorte = require('../models/TemperaturaNorte.js')
+var TemperaturaSur = require('../models/TemperaturaSur.js')
 var TemperaturaEste = require('../models/TemperaturaEste.js');
 var TemperaturaOeste = require('../models/TemperaturaOeste.js');
+
+//función para obtener la temperatura de la zona norte
+exports.getTemperaturaNorte = async function (req, res, next) {
+  try {
+    var temperaturanortes = await TemperaturaNorte.find({});
+    console.log(temperaturanortes); 
+    res.json(temperaturanortes); 
+  } catch (error) {
+    console.error(error); 
+    next(error); 
+  }
+};
+
+//función para obtener la temperatura de la zona sur
+exports.getTemperaturaSur = async function (req, res, next) {
+  try {
+    var temperaturasures = await TemperaturaSur.find({});
+    console.log(temperaturasures); 
+    res.json(temperaturasures);
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+};
 
 //función para obtener la temperatura de la zona este
 exports.getTemperaturaEste = async function (req, res, next) {
@@ -39,15 +65,19 @@ exports.getTemperaturaInRange = async function (req, res, next) {
 
     let Model;
     if (index === '1') {
-      Model = TemperaturaEste;
+      Model = TemperaturaNorte;
+    } else if (index === '2') {
+      Model = TemperaturaSur;
     } else if (index === '3') {
+      Model = TemperaturaEste;
+    } else if (index === '4') {
       Model = TemperaturaOeste;
     } else {
       throw new Error('La dirección proporcionada es inválida');
     }
 
     var temperaturas = await Model.find({
-      temperature: { $gte: min, $lte: max }
+      temperatura: { $gte: min, $lte: max }
     });
 
     console.log(temperaturas); 
@@ -65,14 +95,18 @@ exports.getTemperaturaMin = async function (req, res, next) {
   
       let Model;
       if (index === '1') {
-        Model = TemperaturaEste;
+        Model = TemperaturaNorte;
+      } else if (index === '2') {
+        Model = TemperaturaSur;
       } else if (index === '3') {
+        Model = TemperaturaEste;
+      } else if (index === '4') {
         Model = TemperaturaOeste;
       } else {
-        throw new Error('El índice proporcionado es inválido');
+        throw new Error('La dirección proporcionada es inválida');
       }
   
-      var temperaturaMin = await Model.findOne().sort({temperature: 1});
+      var temperaturaMin = await Model.findOne().sort({temperatura: 1});
   
       console.log(temperaturaMin); 
       res.json(temperaturaMin); 
@@ -89,14 +123,18 @@ exports.getTemperaturaMax = async function (req, res, next) {
   
       let Model;
       if (index === '1') {
-        Model = TemperaturaEste;
+        Model = TemperaturaNorte;
+      } else if (index === '2') {
+        Model = TemperaturaSur;
       } else if (index === '3') {
+        Model = TemperaturaEste;
+      } else if (index === '4') {
         Model = TemperaturaOeste;
       } else {
-        throw new Error('El índice proporcionado es inválido');
+        throw new Error('La dirección proporcionada es inválida');
       }
   
-      var temperaturaMax = await Model.findOne().sort({temperature: -1});
+      var temperaturaMax = await Model.findOne().sort({temperatura: -1});
   
       console.log(temperaturaMax); 
       res.json(temperaturaMax); 

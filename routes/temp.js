@@ -1,7 +1,43 @@
 var express = require('express');
 var router = express.Router();
 
-var temperatureController = require('../controllers/tempController.js');
+var temperaturaController = require('../controllers/tempController.js');
+
+/**
+ * @swagger
+ * /city/temperaturaNorte:
+ *   get:
+ *     tags:
+ *       - Temperatura
+ *     summary: Devuelve la temperatura del norte.
+ *     description: "Ejemplo de uso: /city/temperaturaNorte"
+ *     responses:
+ *       200:
+ *         description: La temperatura del norte.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/TemperaturaNorte'
+ */
+router.get('/city/temperaturaNorte', temperaturaController.getTemperaturaNorte);
+
+/**
+ * @swagger
+ * /city/temperaturaSur:
+ *   get:
+ *     tags:
+ *       - Temperatura
+ *     summary: Devuelve la temperatura del sur.
+ *     description: "Ejemplo de uso: /city/temperaturaSur"
+ *     responses:
+ *       200:
+ *         description: La temperatura del sur.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/TemperaturaSur'
+ */
+router.get('/city/temperaturaSur', temperaturaController.getTemperaturaSur);
 
 /**
  * @swagger
@@ -19,7 +55,7 @@ var temperatureController = require('../controllers/tempController.js');
  *             schema:
  *               $ref: '#/components/schemas/TemperaturaEste'
  */
-router.get('/city/temperaturaEste', temperatureController.getTemperaturaEste);
+router.get('/city/temperaturaEste', temperaturaController.getTemperaturaEste);
 
 /**
  * @swagger
@@ -37,7 +73,7 @@ router.get('/city/temperaturaEste', temperatureController.getTemperaturaEste);
  *             schema:
  *               $ref: '#/components/schemas/TemperaturaOeste'
  */
-router.get('/city/temperaturaOeste', temperatureController.getTemperaturaOeste);
+router.get('/city/temperaturaOeste', temperaturaController.getTemperaturaOeste);
 
 /**
  * @swagger
@@ -64,7 +100,7 @@ router.get('/city/temperaturaOeste', temperatureController.getTemperaturaOeste);
  *                 - $ref: '#/components/schemas/TemperaturaEste'
  *                 - $ref: '#/components/schemas/TemperaturaOeste'
  */
-router.get('/city/temperatura/:index', temperatureController.getTemperaturaInRange);
+router.get('/city/temperatura/:index', temperaturaController.getTemperaturaInRange);
 
 /**
  * @swagger
@@ -91,7 +127,7 @@ router.get('/city/temperatura/:index', temperatureController.getTemperaturaInRan
  *                 - $ref: '#/components/schemas/TemperaturaEste'
  *                 - $ref: '#/components/schemas/TemperaturaOeste'
  */
-router.get('/city/temperatura/:index/min', temperatureController.getTemperaturaMin);
+router.get('/city/temperatura/:index/min', temperaturaController.getTemperaturaMin);
 
 /**
  * @swagger
@@ -118,7 +154,7 @@ router.get('/city/temperatura/:index/min', temperatureController.getTemperaturaM
  *                 - $ref: '#/components/schemas/TemperaturaEste'
  *                 - $ref: '#/components/schemas/TemperaturaOeste'
  */
-router.get('/city/temperatura/:index/max', temperatureController.getTemperaturaMax);
+router.get('/city/temperatura/:index/max', temperaturaController.getTemperaturaMax);
 
 module.exports = router;
 

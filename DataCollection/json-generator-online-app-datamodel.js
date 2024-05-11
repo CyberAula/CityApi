@@ -20,7 +20,7 @@ db.usuarios.updateMany(
   { 
   _id: '{{objectId()}}',
   index: '{{index()}}',
-  sensorType: '{{random("temperature", "energy", "traffic lights state", "street lights state", "wind speed")}}',
+  sensorType: '{{random("temperatura", "energy", "traffic lights state", "street lights state", "wind speed")}}',
   localization: "{{city()}}, {{country()}}",
   altitude: "{{floating(0, 1000, 2)}}",
   latitude: '{{floating(-90.000001, 90)}}',

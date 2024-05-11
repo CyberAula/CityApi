@@ -4,10 +4,10 @@ var Schema = mongoose.Schema;
 
 //esquema de los datos de viento
 const VientoSchema = new mongoose.Schema({
-    sensor_name: String,
-    velocidad: Number,
-    direccion: String,
-    date: Date
-  }, { versionKey: false });
+  nombre_sensor: String,
+  velocidad: Number,
+  direccion: String,
+  fecha: Date
+}, { versionKey: false });
   
   module.exports = mongoose.model('Viento', VientoSchema);

@@ -7,10 +7,15 @@ var createError = require('http-errors');
 var sensoresFilePath = path.join(__dirname, '../DataCollection', 'sensores.json');
 
 //rutas a los modelos
+var TemperaturaNorte = require('../models/TemperaturaNorte.js');
+var TemperaturaSur = require('../models/TemperaturaSur.js');
 var TemperaturaEste = require('../models/TemperaturaEste.js');
 var TemperaturaOeste = require('../models/TemperaturaOeste.js');
 var Viento = require('../models/Viento.js');
 var TrenFrecuencia = require('../models/TrenFrecuencia.js');
+var Luz = require('../models/Luz.js')
+var TraficoCentro = require('../models/TraficoCentro.js');
+var TraficoAfueras = require('../models/TraficoAfueras.js');
 
 //rutas a los controladores
 var vientoController = require('./vientoController.js');
@@ -85,32 +90,66 @@ exports.getDateData = async (req, res, next) => {
             hasta = hasta.toDate();
 
             //determinar el nombre del sensor basado en el tipo de sensor y el índice
-            let sensor_name;
+            let nombre_sensor;
             let sensorData;
-            if (req.params.sensorType === 'temperatura' && req.params.index === '1') {
-                sensor_name = 'Sensor temperatura este';
-                sensorData = await TemperaturaEste.find({
-                    sensor_name: sensor_name,
-                    date: { $gte: desde, $lte: hasta }
-                });
-            } else if (req.params.sensorType === 'temperatura' && req.params.index === '3') {
-                sensor_name = 'Sensor temperatura oeste';
-                sensorData = await TemperaturaOeste.find({
-                    sensor_name: sensor_name,
-                    date: { $gte: desde, $lte: hasta }
-                });
-            } else if (req.params.sensorType === 'viento' && req.params.index === '2') {
-                sensor_name = 'Sensor viento molino';
+            if (req.params.sensorType === 'temperatura') {
+                if (req.params.index === '1') {
+                    nombre_sensor = 'Sensor temperatura norte';
+                    sensorData = await TemperaturaNorte.find({
+                        nombre_sensor: nombre_sensor,
+                        fecha: { $gte: desde, $lte: hasta }
+                    });
+                } else if (req.params.index === '2') {
+                    nombre_sensor = 'Sensor temperatura sur';
+                    sensorData = await TemperaturaSur.find({
+                        nombre_sensor: nombre_sensor,
+                        fecha: { $gte: desde, $lte: hasta }
+                    });
+                } else if (req.params.index === '3') {
+                    nombre_sensor = 'Sensor temperatura este';
+                    sensorData = await TemperaturaEste.find({
+                        nombre_sensor: nombre_sensor,
+                        fecha: { $gte: desde, $lte: hasta }
+                    });
+                } else if (req.params.index === '4') {
+                    nombre_sensor = 'Sensor temperatura oeste';
+                    sensorData = await TemperaturaOeste.find({
+                        nombre_sensor: nombre_sensor,
+                        fecha: { $gte: desde, $lte: hasta }
+                    });
+                }
+            } else if (req.params.sensorType === 'viento' && req.params.index === '5') {
+                nombre_sensor = 'Sensor viento molino';
                 sensorData = await Viento.find({
-                    sensor_name: sensor_name,
-                    date: { $gte: desde, $lte: hasta }
+                    nombre_sensor: nombre_sensor,
+                    fecha: { $gte: desde, $lte: hasta }
                 });
-            } else if (req.params.sensorType === 'trenfrecuencia' && req.params.index === '4') {
-                sensor_name = 'Sensor frecuencia tren';
+            } else if (req.params.sensorType === 'trenfrecuencia' && req.params.index === '6') {
+                nombre_sensor = 'Sensor frecuencia tren';
                 sensorData = await TrenFrecuencia.find({
-                    sensor_name: sensor_name,
-                    date: { $gte: desde, $lte: hasta }
+                    nombre_sensor: nombre_sensor,
+                    fecha: { $gte: desde, $lte: hasta }
                 });
+            } else if (req.params.sensorType === 'luz' && req.params.index === '7') {
+                nombre_sensor = 'Sensor luz';
+                sensorData = await Luz.find({
+                    nombre_sensor: nombre_sensor,
+                    fecha: { $gte: desde, $lte: hasta }
+                });
+            } else if (req.params.sensorType === 'trafico') {
+                if (req.params.index === '8') {
+                    nombre_sensor = 'Sensor tráfico centro';
+                    sensorData = await TraficoCentro.find({
+                        nombre_sensor: nombre_sensor,
+                        fecha: { $gte: desde, $lte: hasta }
+                    });
+                } else if (req.params.index === '9') {
+                    nombre_sensor = 'Sensor tráfico afueras';
+                    sensorData = await TraficoAfueras.find({
+                        nombre_sensor: nombre_sensor,
+                        fecha: { $gte: desde, $lte: hasta }
+                    });
+                }
             } else {
                 throw new Error('Tipo de sensor o índice inválido');
             }
