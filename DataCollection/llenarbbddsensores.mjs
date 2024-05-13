@@ -379,3 +379,46 @@ insertarMultiResiduo()
     console.error("ERROR RESIDUOS", err);
     process.exit();
 });
+
+const alcantarilladoSchema = new mongoose.Schema({
+  nombre_sensor: String,
+  nivel_agua: Number,
+  estado: String,
+  fecha: Date
+}, { versionKey: false });
+
+const Alcantarillado = mongoose.model('Alcantarillado', alcantarilladoSchema);
+
+async function insertarMultiAlcantarillado() {
+  var multiDoc = [];
+  const total = 50;
+  var newDoc;
+  for (var i = 0; i < total; i++) {
+    var nivel_agua = faker.number.float({ min: 10, max: 100, precision: 0.01 });
+    var estado;
+    if (nivel_agua <= 40) {
+      estado = 'Bajo';
+    } else if (nivel_agua <= 80) {
+      estado = 'Medio';
+    } else {
+      estado = 'Lleno';
+    }
+    newDoc = { 
+      nombre_sensor: "Sensor alcantarillado",
+      nivel_agua: nivel_agua,
+      estado: estado,
+      fecha: faker.date.between('2020-01-01', '2025-01-01')
+    };
+    multiDoc.push(newDoc);
+  }
+  return Alcantarillado.insertMany(multiDoc);
+}
+
+insertarMultiAlcantarillado()
+ .then(v => {
+   console.log("RESULTADO ALCANTARILLADO:", v);
+   process.exit();
+}).catch(err => {
+   console.error("ERROR ALCANTARILLADO", err);
+   process.exit();
+});

@@ -16,6 +16,7 @@ var trenRouter = require('./routes/tren');
 var luzRouter = require('./routes/luz');
 var traficoRouter = require('./routes/trafico')
 var residuosRouter = require('./routes/residuos');
+var alcantarilladoRouter = require('./routes/alcantarillado')
 const { type } = require('os');
 
 var app = express();
@@ -415,6 +416,32 @@ const options = {
             }
           },
         },
+        Alcantarillado: {
+          type: 'object',
+          properties: {
+            nombre_sensor: {
+              type: 'string',
+              example: 'Sensor alcantarillado',
+              description: 'El nombre del sensor'
+            },
+            nivel_agua: {
+              type: 'number',
+              example: 45.5,
+              description: 'El nivel del agua en porcentaje'
+            },
+            estado: {
+              type: 'string',
+              example: 'Medio',
+              description: 'El estado del alcantarillado'
+            },
+            fecha: {
+              type: 'string',
+              format: 'date-time',
+              example: '2024-05-08T12:29:05.464Z',
+              description: 'La fecha y hora cuando se tomaron los datos'
+            }
+          },
+        },
       },
     },
   },
@@ -448,6 +475,7 @@ app.use('/', trenRouter);
 app.use('/', luzRouter);
 app.use('/', traficoRouter);
 app.use('/', residuosRouter);
+app.use('/', alcantarilladoRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

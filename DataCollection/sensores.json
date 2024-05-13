@@ -95,6 +95,15 @@
             "linkDoc": "",
             "exampleQueryDateRange": "/city/residuos/10?desde=2024-05-06T15:09:59.059Z&hasta=2024-05-06T18:44:32.529Z",
             "visible": "true"
+        },
+        {
+            "index": "11",
+            "name": "Sensor alcantarillado",
+            "desc": "Este sensor mide la cantidad de agua en el alcantarillado de la ciudad",
+            "sensorType": "alcantarillado",
+            "linkDoc": "",
+            "exampleQueryDateRange": "/city/agua/11?desde=2024-05-06T15:09:59.059Z&hasta=2024-05-06T18:44:32.529Z",
+            "visible": "true"
         }
     ]
 }

@@ -17,11 +17,13 @@ var Luz = require('../models/Luz.js')
 var TraficoCentro = require('../models/TraficoCentro.js');
 var TraficoAfueras = require('../models/TraficoAfueras.js');
 var Residuos = require('../models/Residuos.js');
+var Alcantarillado = require('../models/Alcantarillado.js');
 
 //rutas a los controladores
 var vientoController = require('./vientoController.js');
 var tempController = require('./tempController.js');
 var traficoController = require('./traficoController.js');
+var alcantarilladoController = require('./alcantarilladoController.js')
 
 //función para obtener los datos de los sensores
 exports.getSensoresData = (req, res, next) => {
@@ -51,6 +53,7 @@ exports.getDateData = async (req, res, next) => {
             { check: () => req.query.min !== undefined && req.query.max !== undefined, action: () => tempController.getTemperaturaInRange(req, res, next) },
             { check: () => req.query.min !== undefined, action: () => tempController.getTemperaturaMin(req, res, next) },
             { check: () => req.query.max !== undefined, action: () => tempController.getTemperaturaMax(req, res, next) },
+            { check: () => req.query.estado, action: () => alcantarilladoController.getNivelAgua(req, res, next)  }
         ];
 
         for (let condition of conditions) {
@@ -156,6 +159,12 @@ exports.getDateData = async (req, res, next) => {
             } else if (req.params.index === '10') {
                 nombre_sensor = 'Sensor residuos';
                 sensorData = await Residuos.find({
+                    nombre_sensor: nombre_sensor,
+                    fecha: { $gte: desde, $lte: hasta }
+                });
+            } else if (req.params.index === '11'){
+                nombre_sensor = 'Sensor alcantarillado';
+                sensorData = await Alcantarillado.find({
                     nombre_sensor: nombre_sensor,
                     fecha: { $gte: desde, $lte: hasta }
                 });
