@@ -16,6 +16,7 @@ var TrenFrecuencia = require('../models/TrenFrecuencia.js');
 var Luz = require('../models/Luz.js')
 var TraficoCentro = require('../models/TraficoCentro.js');
 var TraficoAfueras = require('../models/TraficoAfueras.js');
+var Residuos = require('../models/Residuos.js');
 
 //rutas a los controladores
 var vientoController = require('./vientoController.js');
@@ -152,6 +153,12 @@ exports.getDateData = async (req, res, next) => {
                         fecha: { $gte: desde, $lte: hasta }
                     });
                 }
+            } else if (req.params.index === '10') {
+                nombre_sensor = 'Sensor residuos';
+                sensorData = await Residuos.find({
+                    nombre_sensor: nombre_sensor,
+                    fecha: { $gte: desde, $lte: hasta }
+                });
             } else {
                 throw new Error('Tipo de sensor o índice inválido');
             }

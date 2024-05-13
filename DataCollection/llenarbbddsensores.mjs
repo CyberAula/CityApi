@@ -336,3 +336,46 @@ insertarMultiTraficoAfueras()
    console.error("ERROR TRÁFICO AFUERAS", err);
    process.exit();
 });
+
+const residuoSchema = new mongoose.Schema({
+  nombre_sensor: String,
+  contenedores: [{
+    zona: String,
+    hora_llenado: String,
+    hora_recogida: String,
+  }],
+  fecha: Date
+}, { versionKey: false });
+
+const Residuos = mongoose.model('Residuo', residuoSchema);
+
+async function insertarMultiResiduo() {
+  var multiDoc = [];
+  const total = 30;
+  var newDoc;
+  for (var i = 0; i < total; i++) {
+    const hora_llenado = fakeTime(17, 18);
+
+    newDoc = { 
+      nombre_sensor: "Sensor residuos",
+      contenedores: [
+        { zona: 'Norte', hora_llenado: hora_llenado, hora_recogida: fakeTimeAfter(hora_llenado, 30,60) },
+        { zona: 'Este', hora_llenado: hora_llenado, hora_recogida: fakeTimeAfter(hora_llenado, 30,60) },
+        { zona: 'Sur', hora_llenado: hora_llenado, hora_recogida: fakeTimeAfter(hora_llenado, 30,60) },
+        { zona: 'Oeste', hora_llenado: hora_llenado, hora_recogida: fakeTimeAfter(hora_llenado, 30,60) }
+      ],
+      fecha: faker.date.between({ from: '2020-01-01T00:00:00.000Z', to: '2025-01-01T00:00:00.000Z'})
+    };
+    multiDoc.push(newDoc);
+  }
+  return Residuos.insertMany(multiDoc);
+}
+
+insertarMultiResiduo() 
+  .then(v => {
+    console.log("RESULTADO RESIDUOS:", v);
+    process.exit();
+}).catch(err => {
+    console.error("ERROR RESIDUOS", err);
+    process.exit();
+});

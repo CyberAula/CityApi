@@ -15,6 +15,7 @@ var vientoRouter = require('./routes/viento');
 var trenRouter = require('./routes/tren');
 var luzRouter = require('./routes/luz');
 var traficoRouter = require('./routes/trafico')
+var residuosRouter = require('./routes/residuos');
 const { type } = require('os');
 
 var app = express();
@@ -372,7 +373,48 @@ const options = {
             }
           },
         },
-
+        Residuo: {
+          type: 'object',
+          properties: {
+            nombre_sensor: {
+              type: 'string',
+              example: 'Sensor residuos',
+              description: 'El nombre del sensor'
+            },
+            contenedores: {
+              type: 'array',
+              items: {
+                type: 'object',
+                properties: {
+                  zona: {
+                    type: 'string',
+                    enum: ['Norte', 'Sur', 'Este', 'Oeste'],
+                    example: 'Norte',
+                    description: 'La zona del contenedor'
+                  },          
+                  hora_llenado: {
+                    type: 'string',
+                    format: 'date-time',
+                    example: '17:30',
+                    description: 'La hora cuando el contenedor se llenó'
+                  },
+                  hora_recogida: {
+                    type: 'string',
+                    format: 'date-time',
+                    example: '18:00',
+                    description: 'La hora cuando el camión de recogida pasó'
+                  },
+                },
+              },
+            },
+            fecha: {
+              type: 'string',
+              format: 'date-time',
+              example: '2024-05-08T12:29:05.464Z',
+              description: 'La fecha y hora cuando se tomaron los datos'
+            }
+          },
+        },
       },
     },
   },
@@ -405,6 +447,7 @@ app.use('/', vientoRouter);
 app.use('/', trenRouter);
 app.use('/', luzRouter);
 app.use('/', traficoRouter);
+app.use('/', residuosRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
