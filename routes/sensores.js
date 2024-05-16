@@ -18,36 +18,42 @@ var sensoresController = require('../controllers/sensoresController.js');
  *             schema:
  *               $ref: '#/components/schemas/Sensores'
  */
-router.get('/city/sensores', sensoresController.getSensoresData);
+router.get('/sensores', sensoresController.getSensoresData);
 
 /**
  * @swagger
- * /city/{sensorType}/{index}:
+ * /city/sensores/{numid}:
  *   get:
  *     tags:
  *       - Sensores
- *     summary: Devuelve los datos de un tipo específico de sensor.
+ *     summary: Devuelve los datos del sensor con el numid especificado.
  *     parameters:
  *       - in: path
- *         name: sensorType
+ *         name: numid
  *         required: true
- *         description: Tipo de sensor.
- *         schema:
- *           type: string
- *       - in: path
- *         name: index
- *         required: true
- *         description: Índice del sensor.
  *         schema:
  *           type: integer
+ *         description: El numid del sensor.
+ *       - in: query
+ *         name: desde
+ *         schema:
+ *           type: string
+ *           format: date-time
+ *         description: La fecha de inicio para filtrar los datos del sensor.
+ *       - in: query
+ *         name: hasta
+ *         schema:
+ *           type: string
+ *           format: date-time
+ *         description: La fecha de fin para filtrar los datos del sensor.
  *     responses:
  *       200:
- *         description: Los datos del sensor especificado.
+ *         description: Los datos del sensor.
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Sensores'
+ *               $ref: '#/components/schemas/Sensor'
  */
-router.get('/city/:sensorType/:index', sensoresController.getDateData);
+router.get('/sensores/:numid', sensoresController.getSensorData);
 
 module.exports = router;

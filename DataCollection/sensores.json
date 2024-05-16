@@ -1,109 +1,27 @@
-{
-    "sensores": [
+[
         {
-            "index": "1",
-            "name": "Sensor temperatura norte",
+            "numid": 1,
+            "name": "Temperatura y Humedad",
+            "collectionName": "Hygrothermograph",
+            "allowed_params": ["propiedad", "min", "max"],
             "desc": "Este sensor mide la temperatura en el norte de la ciudad",
-            "sensorType": "temperatura",
             "linkDoc": "",
-            "exampleQueryDateRange": "/city/temperatura/1?desde=2024-05-06T22:53:14.205Z&hasta=2024-05-07T01:12:15.758Z",
-            "exampleQueryTempRange": "/city/temperatura/1?min=5.0&max=21",
-            "visible": "true"
+            "exampleQueryDateRange": "/sensores/1?desde=2024-05-06T22:53:14.205Z&hasta=2024-05-07T01:12:15.758Z",
+            "exampleQueryTempRange": "/sensores/1?propiedad=temp&min=5.0&max=21",
+            "exampleQueryHumidityRange": "/sensores/1?propiedad=humidity&min=5.0&max=21",
+            "visible": "true",
+            "realtime": "true"            
         },
-        {
-            "index": "2",
-            "name": "Sensor temperatura sur",
-            "desc": "Este sensor mide la temperatura en el sur de la ciudad",
-            "sensorType": "temperatura",
-            "linkDoc": "",
-            "exampleQueryDateRange": "/city/temperatura/2?desde=2024-05-06T22:53:14.205Z&hasta=2024-05-07T01:12:15.758Z",
-            "exampleQueryTempRange": "/city/temperatura/2?min=5.0&max=21",
-            "visible": "true"
-        },
-        {
-            "index": "3",
-            "name": "Sensor temperatura este",
-            "desc": "Este sensor mide la temperatura en el este de la ciudad",
-            "sensorType": "temperatura",
-            "linkDoc": "",
-            "exampleQueryDateRange": "/city/temperatura/3?desde=2024-05-06T15:09:59.059Z&hasta=2024-05-06T18:44:32.529Z",
-            "exampleQueryTempRange": "/city/temperatura/3?min=5.0&max=21",
-            "visible": "true"
-        },
-        {
-            "index": "4",
-            "name": "Sensor temperatura oeste",
-            "desc": "Este sensor mide la temperatura en el oeste de la ciudad",
-            "sensorType": "temperatura",
-            "linkDoc": "",
-            "exampleQueryDateRange": "/city/temperatura/4?desde=2024-05-06T15:09:59.059Z&hasta=2024-05-06T18:44:32.529Z",
-            "exampleQueryTempRange": "/city/temperatura/4?min=5.0&max=21",
-            "visible": "true"
-        },
-        {
-            "index": "5",
-            "name": "Sensor viento molino",
-            "desc": "Este sensor recoge los datos del viento en el molino de la ciudad",
-            "sensorType": "viento",
-            "linkDoc": "",
-            "exampleQueryDateRange": "/city/viento/5?desde=2024-05-06T17:30:22.479Z&hasta=2024-05-07T02:34:10.469Z",
-            "visible": "true"
-        },
-        {
-            "index": "6",
-            "name": "Sensor frecuencia tren",
-            "desc": "Este sensor recoge los datos de la frecuencia con la que el tren pasó por la estación por la mañana, la tarde y la noche",
-            "sensorType": "trenfrecuencia",
-            "linkDoc": "",
-            "exampleQueryDateRange": "/city/trenfrecuencia/6?desde=2024-05-06T15:09:59.059Z&hasta=2024-05-06T18:44:32.529Z",
-            "exampleQuery":"/city/trenfrecuencia",
-            "exampleQueryRangos":"/city/trenfrecuencia/6/menorque?frecMañana=10, /city/trenfrecuencia/4/mayorque?frecTarde=10",
-            "visible": "true"
-        },
-        {
-            "index": "7",
-            "name": "Sensor luz",
-            "desc": "Este sensor recoge los datos de la luz y de laa farolas en la ciudad",
-            "sensorType": "luz",
-            "linkDoc": "",
-            "exampleQueryDateRange": "/city/luz/7?desde=2024-05-06T15:09:59.059Z&hasta=2024-05-06T18:44:32.529Z",
-            "visible": "true"
-        },
-        {
-            "index": "8",
-            "name": "Sensor tráfico centro",
-            "desc": "Este sensor recoge los datos del tráfico en el centro de la ciudad",
-            "sensorType": "trafico",
-            "linkDoc": "",
-            "exampleQueryDateRange": "/city/trafico/8?desde=2023-05-06T15:09:59.059Z&hasta=2024-05-06T18:44:32.529Z",
-            "visible": "true"
-        },
-        {
-            "index": "9",
-            "name": "Sensor tráfico afueras",
-            "desc": "Este sensor recoge los datos del tráfico en las afueras de la ciudad",
-            "sensorType": "trafico",
-            "linkDoc": "",
-            "exampleQueryDateRange": "/city/trafico/9?desde=2023-05-06T15:09:59.059Z&hasta=2024-05-06T18:44:32.529Z",
-            "visible": "true"
-        },
-        {
-            "index": "10",
-            "name": "Sensor residuos",
-            "desc": "Este sensor mide la cantidad de residuos en la ciudad",
-            "sensorType": "residuos",
-            "linkDoc": "",
-            "exampleQueryDateRange": "/city/residuos/10?desde=2024-05-06T15:09:59.059Z&hasta=2024-05-06T18:44:32.529Z",
-            "visible": "true"
-        },
-        {
-            "index": "11",
-            "name": "Sensor alcantarillado",
-            "desc": "Este sensor mide la cantidad de agua en el alcantarillado de la ciudad",
-            "sensorType": "alcantarillado",
-            "linkDoc": "",
-            "exampleQueryDateRange": "/city/agua/11?desde=2024-05-06T15:09:59.059Z&hasta=2024-05-06T18:44:32.529Z",
-            "visible": "true"
+        { 
+            "numid": 2,
+            "name": "Conmutador y Servomotor", 
+            "collectionName": "conmutador", 
+            "allowed_params": ["estado"], 
+            "desc": "String: valor de cambio de la vía en un sentido u otro. Ejemplo: 1 = activada vía de servicio, 2 = activada vía normal", 
+            "linkDoc": "", 
+            "exampleQueryDateRange": "/sensores/2?desde=2024-05-06T22:53:14.205Z&hasta=2024-05-07T01:12:15.758Z",
+            "exampleQueryEstado": "/sensores/2?estado=1", 
+            "visible": "true", 
+            "realtime": "true"
         }
-    ]
-}
+]
