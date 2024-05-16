@@ -2,7 +2,7 @@
 https://json-generator.com/
 */
 import mongoose from 'mongoose';
-import { fakerES as faker } from '@faker-js/faker';
+import { fa, fakerES as faker } from '@faker-js/faker';
 
 const dbname = "Datos";
 faker.seed(123);
@@ -111,4 +111,50 @@ insertarMultiEstadoRail()
    console.error("ERROR ESTADO RAIL", err);
    process.exit();
 });
+
+const ultrasonidoSchema = new mongoose.Schema({
+  sensor_id: Number,
+  nombre_sensor: String,
+  ultasonic: {
+    type: {
+      type: String,
+      default: "Property"
+    },
+    value: Number
+  },
+  fecha: Date
+}, {
+  versionKey: false
+});
+
+const Ultrasonido = mongoose.model('Ultrasonido', ultrasonidoSchema);
+
+async function insertUltasonic() {
+  var multiDoc = [];
+  const total = 50;
+  var newDoc;
+  for (var i = 0; i < total; i++) {
+    newDoc = {
+    sensor_id: 3,
+    nombre_sensor: "Ultrasonido",
+    ultasonic: {
+      type: "Property",
+      value: faker.number.float({ min: 0, max: 1000, precision: 0.01 })
+    },
+    fecha: faker.date.between({ from: '2020-01-01T00:00:00.000Z', to: '2025-01-01T00:00:00.000Z'})
+  };
+  multiDoc.push(newDoc);
+}
+return Ultrasonido.insertMany(multiDoc);
+}
+
+insertUltasonic()
+  .then(v => {
+    console.log("RESULTADO ULTASONIC:", v);
+    process.exit();
+  })
+  .catch(err => {
+    console.error("ERROR ULTASONIC", err);
+    process.exit();
+  });
 

@@ -9,6 +9,7 @@ const helpers = require('../helpers/index');
 const Sensores = require('../models/Sensores');
 const Temperatura = require('../models/Temperatura');
 const Rail = require('../models/Rail');
+const Ultrasonido = require('../models/Ultrasonido');
 
 //función para obtener los datos de los sensores
 exports.getSensoresData = (req, res, next) => {
@@ -56,6 +57,11 @@ exports.getSensorData = async function (req, res, next) {
                 break;
             case '2':
                 responseData = await Rail.find({
+                    fecha: { $gte: desde, $lte: hasta }
+                });
+                break;
+            case '3':
+                responseData = await Ultrasonido.find({
                     fecha: { $gte: desde, $lte: hasta }
                 });
                 break;

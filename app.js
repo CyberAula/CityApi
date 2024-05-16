@@ -12,7 +12,7 @@ var indexRouter = require('./routes/index');
 var sensoresRouter = require('./routes/sensores');
 var tempRouter = require('./routes/temp');
 var railRouter = require('./routes/rail');
-
+var ultrasonidoRouter = require('./routes/ultrasonido');
 const { type } = require('os');
 
 var app = express();
@@ -164,6 +164,7 @@ app.use('/', indexRouter);
 app.use('/', sensoresRouter);
 app.use('/', tempRouter);
 app.use('/', railRouter);
+app.use('/', ultrasonidoRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
