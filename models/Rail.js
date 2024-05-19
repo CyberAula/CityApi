@@ -1,6 +1,5 @@
 //models/Rail.js
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
 
 //esquema de los datos de la frecuencia del tren
 const estadoRailSchema = new mongoose.Schema({

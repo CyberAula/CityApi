@@ -5,7 +5,7 @@ var sensoresController = require('../controllers/sensoresController.js');
 
 /**
  * @swagger
- * /city/sensores:
+ * /sensores:
  *   get:
  *     tags:
  *       - Sensores
@@ -22,11 +22,15 @@ router.get('/sensores', sensoresController.getSensoresData);
 
 /**
  * @swagger
- * /city/sensores/{numid}:
+ * /sensores/{numid}:
  *   get:
  *     tags:
  *       - Sensores
- *     summary: Devuelve los datos del sensor con el numid especificado.
+ *     summary: Devuelve los datos del sensor con el numid especificado. Si se proporcionan los parámetros 'desde' y 'hasta', filtra los datos del sensor por fecha.
+ *     description: >
+ *       Este endpoint tiene dos usos principales:
+ *       1. Si se hace una solicitud GET sin proporcionar ningún parámetro de consulta, se obtendrá la información del sensor con el numid especificado.
+ *       2. Si se hace una solicitud GET proporcionando los parámetros de consulta 'desde' y 'hasta', se obtendrán los datos del sensor con el numid especificado que estén dentro del rango de fechas especificado.
  *     parameters:
  *       - in: path
  *         name: numid
@@ -52,7 +56,7 @@ router.get('/sensores', sensoresController.getSensoresData);
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Sensor'
+ *               $ref: '#/components/schemas/Sensores'
  */
 router.get('/sensores/:numid', sensoresController.getSensorData);
 

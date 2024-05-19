@@ -152,9 +152,9 @@ insertUltasonic()
   .then(v => {
     console.log("RESULTADO ULTASONIC:", v);
     process.exit();
-  })
-  .catch(err => {
+})
+.catch(err => {
     console.error("ERROR ULTASONIC", err);
     process.exit();
-  });
+});
 
