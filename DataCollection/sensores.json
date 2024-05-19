@@ -34,5 +34,16 @@
             "exampleQueryDateRange": "/sensores/3?desde=2024-05-06T22:53:14.205Z&hasta=2024-05-07T01:12:15.758Z", 
             "visible": "true", 
             "realtime": "true"
+        },
+        { 
+            "numid": 4,
+            "name": "Fotorresistor", 
+            "collectionName": "fotorresistor", 
+            "allowed_params": ["orden"], 
+            "desc": "La resistencia de una fotorresistencia cambiará en proporción a la luz ambiente detectada.", 
+            "uso": "Este sensor va a simular el encendido y apagado de farolas, representadas por luces LED. Debe trabajar en conjunto con el PIR Sensor y con las siguientes condiciones. Encender el LED si PIR  y el Fotorresistor <=0. Esto se conseguiría tapando totalmente el sensor de luminosidad.", 
+            "exampleQueryDateRange": "/sensores/4?desde=2024-05-06T22:53:14.205Z&hasta=2024-05-07T01:12:15.758Z", 
+            "visible": "true", 
+            "realtime": "true"
         }
 ]

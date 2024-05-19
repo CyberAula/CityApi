@@ -158,3 +158,49 @@ insertUltasonic()
     process.exit();
 });
 
+const fotorresistorSchema = new mongoose.Schema({
+  sensor_id: Number,
+  nombre_sensor: String,
+  luminosity: {
+    type: {
+      type: String,
+      default: "Property"
+    },
+    value: Number
+  },
+  fecha: Date
+}, {
+  versionKey: false
+});
+
+const Fotorresistor = mongoose.model('Fotorresistore', fotorresistorSchema);
+
+async function insertarMultiLuminosidad() {
+  var multiDoc = [];
+  const total = 50;
+  var newDoc;
+  for (var i = 0; i < total; i++) {
+    newDoc = {
+      sensor_id: 4,
+      nombre_sensor: "Fotorresistor",
+      luminosity: {
+        type: "Property",
+        value: faker.number.float({ min: 0, max: 255, precision: 0.01 })
+      },
+      fecha: faker.date.between({ from: '2020-01-01T00:00:00.000Z', to: '2025-01-01T00:00:00.000Z'})
+    };
+    multiDoc.push(newDoc);
+  }
+  return Fotorresistor.insertMany(multiDoc);
+}
+
+insertarMultiLuminosidad()
+  .then(v => {
+    console.log("RESULTADO LUMINOSIDAD:", v);
+    process.exit();
+  })
+  .catch(err => {
+    console.error("ERROR LUMINOSIDAD", err);
+    process.exit();
+  });
+
