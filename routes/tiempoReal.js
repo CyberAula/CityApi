@@ -115,7 +115,22 @@ async function obtenerDatoEnTiempoReal(numid) {
     }
 }
 
-//ruta para obtener datos en tiempo real
+/**
+ * @swagger
+ * /tiempoReal/sensores/{numid}:
+ *   get:
+ *     tags:
+ *       - Tiempo Real
+ *     summary: Obtener datos en tiempo real de un sensor.
+ *     description: Obtiene los datos en tiempo real de un sensor específico.
+ *     parameters:
+ *       - in: path
+ *         name: numid
+ *         required: true
+ *         description: El ID del sensor.
+ *         schema:
+ *           type: string
+ */
 router.get('/tiempoReal/sensores/:numid', async (req, res) => {
     const numid = req.params.numid;
     const dato = await obtenerDatoEnTiempoReal(numid);
