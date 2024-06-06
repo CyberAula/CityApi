@@ -4,7 +4,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
 var swaggerUi = require('swagger-ui-express');
 var swaggerJsdoc = require('swagger-jsdoc');
 
@@ -13,7 +12,8 @@ var sensoresRouter = require('./routes/sensores');
 var tempRouter = require('./routes/temp');
 var railRouter = require('./routes/rail');
 var ultrasonidoRouter = require('./routes/ultrasonido');
-const { type } = require('os');
+var farolasRouter = require('./routes/fotorresistor');
+var tiempoRealRouter = require('./routes/tiempoReal');
 
 var app = express();
 
@@ -140,16 +140,6 @@ const options = {
         Raíl: {
           type: 'object',
           properties: {
-            sensor_id: {
-              type: 'number',
-              example: 2,
-              description: 'El índice del sensor'
-            },
-            nombre_sensor: {
-              type: 'string',
-              example: 'Conmutador y Servomotor',
-              description: 'El nombre del sensor'
-            },
             commuter: {
               type: 'object',
               properties: {
@@ -164,6 +154,16 @@ const options = {
                 }
               }
             },
+            sensor_id: {
+              type: 'number',
+              example: 2,
+              description: 'El índice del sensor'
+            },
+            nombre_sensor: {
+              type: 'string',
+              example: 'Conmutador y Servomotor',
+              description: 'El nombre del sensor'
+            },
             fecha: {
               type: 'string',
               format: 'date-time',
@@ -172,41 +172,76 @@ const options = {
             }
           },
         },
-      Ultrasonido: {
-        type: 'object',
-        properties: {
-          sensor_id: {
-            type: 'number',
-            example: 3,
-            description: 'El índice del sensor'
-          },
-          nombre_sensor: {
-            type: 'string',
-            example: 'Ultrasonido',
-            description: 'El nombre del sensor'
-          },
-          ultasonic: {
-            type: 'object',
-            properties: {
-              type: {
-                type: 'string',
-                default: 'Property'
-              },
-              value: {
-                type: 'number',
-                example: 458.76,
-                description: 'La distancia entre dos elementos en metros'
+        Ultrasonido: {
+          type: 'object',
+          properties: {
+            ultasonic: {
+              type: 'object',
+              properties: {
+                type: {
+                  type: 'string',
+                  default: 'Property'
+                },
+                value: {
+                  type: 'number',
+                  example: 458.76,
+                  description: 'La distancia entre dos elementos en metros'
+                }
               }
+            },
+            sensor_id: {
+              type: 'number',
+              example: 3,
+              description: 'El índice del sensor'
+            },
+            nombre_sensor: {
+              type: 'string',
+              example: 'Ultrasonido',
+              description: 'El nombre del sensor'
+            },
+            fecha: {
+              type: 'string',
+              format: 'date-time',
+              example: '2024-05-08T12:29:05.464Z',
+              description: 'La fecha y hora cuando se tomaron los datos'
             }
           },
-          fecha: {
-            type: 'string',
-            format: 'date-time',
-            example: '2024-05-08T12:29:05.464Z',
-            description: 'La fecha y hora cuando se tomaron los datos'
-          }
         },
-      }
+        Farolas: {
+          type: 'object',
+          properties: {
+            luminosity: {
+              type: 'object',
+              properties: {
+                type: {
+                  type: 'string',
+                  default: 'Property'
+                },
+                value: {
+                  type: 'number',
+                  example: 30,
+                  description: 'La intensidad de luz en amperios'
+                }
+              }
+            },
+            sensor_id: {
+              type: 'number',
+              example: 4,
+              description: 'El índice del sensor'
+            },
+            nombre_sensor: {
+              type: 'string',
+              example: 'Fotorresistor',
+              description: 'El nombre del sensor'
+            },
+            fecha: {
+              type: 'string',
+              format: 'date-time',
+              example: '2024-05-08T12:29:05.464Z',
+              description: 'La fecha y hora cuando se tomaron los datos'
+            }
+          },
+        },
       },
     },
   },
@@ -237,6 +272,8 @@ app.use('/', sensoresRouter);
 app.use('/', tempRouter);
 app.use('/', railRouter);
 app.use('/', ultrasonidoRouter);
+app.use('/', farolasRouter);
+app.use('/', tiempoRealRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

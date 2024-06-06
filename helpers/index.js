@@ -11,7 +11,7 @@ exports.getCollection = async function(collectionName, sensor_id, queryParams) {
                 let max = parseFloat(queryParams.max);
                 result = await tempController.getMinAndMaxTemp(sensor_id, min, max);
             }
-            if ((queryParams.propiedad = "humidity") && queryParams.min && queryParams.max) {
+            if ((queryParams.propiedad = "humd") && queryParams.min && queryParams.max) {
                 let min = parseFloat(queryParams.min);
                 let max = parseFloat(queryParams.max);
                 result = await tempController.getMinAndMaxHumidity(sensor_id, min, max);

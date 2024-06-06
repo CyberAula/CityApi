@@ -5,12 +5,12 @@ var temperaturaController = require('../controllers/tempController.js');
 
 /**
  * @swagger
- * /temperatura:
+ * /sensores/{sensor_id}/temp&humd:
  *   get:
  *     tags:
  *       - Temperatura
  *     summary: Devuelve las temperaturas registradas.
- *     description: "Ejemplo de uso: /temperatura"
+ *     description: "Ejemplo de uso: /sensores/1/temp&humd"
  *     responses:
  *       200:
  *         description: La temperatura de la ciudad.
@@ -19,7 +19,7 @@ var temperaturaController = require('../controllers/tempController.js');
  *             schema:
  *               $ref: '#/components/schemas/Temperatura'
  */
-router.get('/temperatura', temperaturaController.getTemperatura);
+router.get('/sensores/:sensor_id/temp&humd', temperaturaController.getTemperatura);
 
 /**
  * @swagger
@@ -66,12 +66,12 @@ router.get('/sensores/:sensor_id', temperaturaController.getMinAndMaxTemp);
 
 /**
  * @swagger
- * /sensores/{sensor_id}?propiedad=humidity&min={min}&max={max}:
+ * /sensores/{sensor_id}?propiedad=humd&min={min}&max={max}:
  *   get:
  *     tags:
  *       - Humedad
  *     summary: Devuelve la humedad en un rango especificado.
- *     description: "Ejemplo de uso: /sensores/1?propiedad=humidity&min=10&max=20"
+ *     description: "Ejemplo de uso: /sensores/1?propiedad=humd&min=10&max=20"
  *     parameters:
  *       - in: path
  *         name: sensor_id

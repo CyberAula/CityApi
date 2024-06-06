@@ -45,5 +45,27 @@
             "exampleQueryDateRange": "/sensores/4?desde=2024-05-06T22:53:14.205Z&hasta=2024-05-07T01:12:15.758Z", 
             "visible": "true", 
             "realtime": "true"
+        },
+        {
+            "numid": 5,
+            "name": "RFID",
+            "collectionName": "rfid",
+            "allowed_params": [],
+            "desc": "RFID (Identificación por Radiofrecuencia) es una forma de tecnología de comunicación inalámbrica. Un sistema RFID generalmente está compuesto por un transpondedor y un lector. El transpondedor, comúnmente conocido como etiqueta, tiene un código único adjunto a un objeto para identificar el objeto objetivo. El lector es un dispositivo que lee (o escribe) información de la etiqueta.",
+            "uso": "Este sensor se utilizará para simular un sistema de peaje para el tren de carga. El tren llevará el transpondedor adjunto como un llavero en el primer vagón. Luego, habrá una pequeña torre ubicada en un lugar específico sobre la vía del tren donde se encuentra el lector. Cada vez que el tren pase por la torre, se leerá el transpondedor, lo que permitirá calcular el número de veces que el tren ha pasado en una sesión.",
+            "exampleQueryDateRange": "/sensores/5?desde=2024-05-06T22:53:14.205Z&hasta=2024-05-07T01:12:15.758Z",
+            "visible": "true",
+            "realtime": "true"
+        }, 
+        {
+            "numid": 6,
+            "name": "PIR Sensor",
+            "collectionName": "pir",
+            "allowed_params": [],
+            "desc": "Este sensor de movimiento por infrarrojos puede detectar el espectro infrarrojo (firmas de calor) emitido por seres humanos vivos y animales vivos.",
+            "uso": "Este sensor lo utilizaremos para detectar cuando alguien entra en la sala y va a tener dos objetivos.\n\n1. Encender un LED indicando que el sensor ha detectado la presencia.\n2. Funcionamiento en conjunto con un Sensor de luminosidad para que si el PIR envía una señal de que hay presencia y cuando se cubra el sensor de luminosidad se enciendan ciertas luces LED (Simularía el encendido de farolas siempre y cuando haya alguien en la sala).",
+            "exampleQueryDateRange": "/sensores/6?desde=2024-05-06T22:53:14.205Z&hasta=2024-05-07T01:12:15.758Z",
+            "visible": "true",
+            "realtime": "true"
         }
 ]
