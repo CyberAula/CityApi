@@ -18,23 +18,6 @@ var continuoRouter = require('./routes/continuo');
 
 var app = express();
 
-// Socket.io
-const http = require('http');
-const server = http.createServer(app);
-const { Server } = require("socket.io");
-const io = new Server(server);
-
-io.on('connection', (socket) => {
-  console.log('Un cliente se ha conectado');
-
-setInterval(() => {
-  socket.emit('sensorData', {
-    timestamp: new Date(),
-    value: Math.random() // Valor aleatorio para el ejemplo
-  });
-}, 5000);
-});
-
 // Conexión a la base de datos
 mongoose.connect('mongodb://0.0.0.0/Datos', {
   useNewUrlParser: true,
@@ -58,8 +41,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-server.listen(app.get('port'), function () {
-  console.log('Express and Socket.IO server listening on port ' + app.get('port'));
+app.listen(app.get('port'), function () {
+  console.log('Express server listening on port ' + app.get('port'));
 });
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs))
