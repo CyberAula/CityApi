@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
 var { swaggerUi, specs } = require('./swagger');
+var connectDB = require('./db.js');
 
 // Rutas
 var indexRouter = require('./routes/index');
@@ -18,17 +19,7 @@ var continuoRouter = require('./routes/continuo');
 
 var app = express();
 
-// Conexión a la base de datos
-mongoose.connect('mongodb://0.0.0.0/Datos', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
-
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function () {
-  console.log("Connected to MongoDB");
-});
+connectDB().then(() => {
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -64,6 +55,8 @@ app.use(function (req, res, next) {
 app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', { message: err.message || 'An error occurred', error: err });
+});
+
 });
 
 module.exports = app;

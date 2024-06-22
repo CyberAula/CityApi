@@ -4,15 +4,9 @@ https://json-generator.com/
 import mongoose from 'mongoose';
 import { fa, fakerES as faker } from '@faker-js/faker';
 
-const dbname = "Datos";
 faker.seed(123);
-await mongoose.connect('mongodb://0.0.0.0/' + dbname, { useNewUrlParser: true, useUnifiedTopology: true });
-
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function () {
-  console.log("we're connected!");
-});
+import connectDB from '../db.js';
+await connectDB();
 
 const temperaturaSchema = new mongoose.Schema({
   sensor_id: Number,
