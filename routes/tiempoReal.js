@@ -61,7 +61,7 @@ async function obtenerDatoEnTiempoReal(numid) {
             unidad = "";
             break;
         case '8':
-            urn = "urn:ngsi-ld:InfraredSensor:002";
+            urn = "urn:ngsi-ld:InfraredSensor:001";
             nombre = "sensor de infrarrojo";
             unidad = "";
             break;
