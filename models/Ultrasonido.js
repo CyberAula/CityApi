@@ -1,19 +1,43 @@
 //models/Ultrasonido.js
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
-const ultrasonidoSchema = new mongoose.Schema({
-    sensor_id: Number,
-    nombre_sensor: String,
-    ultasonic: {
-      type: {
+//esquema de los datos del ultrasonido
+const ultrasonidoSchema = new Schema({
+  id: String,
+  type: String,
+  subscriptionId: String,
+  notifiedAt: Date,
+  data: [{
+      Object: {
+        id: String,
         type: String,
-        default: "Property"
-      },
-      value: Number
-    },
-    fecha: Date
+        category: {
+          type: {
+            type: String,
+            default: "Property"
+          },
+          value: String
+        },
+        controlledAsset: {
+          type: {
+            type: String,
+            default: "Relationship"
+          },
+          object: String
+        },
+        distance: {
+          type: {
+            type: String,
+            default: "Property"
+          },
+          value: Number,
+          unitCode: String 
+        }
+      }
+  }]
 }, {
-    versionKey: false
+  versionKey: false
 });
-
-module.exports = mongoose.model('Ultrasonido', ultrasonidoSchema);
+  
+module.exports = mongoose.model('Ultrasonido', ultrasonidoSchema, 'sth_urn_ngsi-ld_UltrasoundSensor_001');

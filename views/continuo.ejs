@@ -54,36 +54,41 @@
         };
 
         // Función para obtener datos del sensor
-        function obtenerDatosSensor() {
-            $.ajax({
-                url: '/tiempoReal/sensores/' + numid, // Reemplaza esto con la ruta correcta
-                method: 'GET',
-                success: function (data) {
-                    console.log(data); // Registra en la consola el objeto data
+function obtenerDatosSensor(simple = false) {
+    var url = '/tiempoReal/sensores/' + numid;
+    if (simple) {
+        url += '/simple'; // Añade /simple a la URL si se solicita el mensaje simple
+    }
 
-                    var tableBody = document.getElementById('sensorDataTable').getElementsByTagName('tbody')[0];
-                    var row = tableBody.insertRow(-1);
-                    var cell1 = row.insertCell(0);
-                    var cell2 = row.insertCell(1);
+    $.ajax({
+        url: url,
+        method: 'GET',
+        success: function (data) {
+            console.log(data);
 
-                    var sensorDataProperty = sensorDataProperties[data.type];
-                    var sensorValue;
+            var tableBody = document.getElementById('sensorDataTable').getElementsByTagName('tbody')[0];
+            var row = tableBody.insertRow(-1);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
 
-                    if (data[sensorDataProperty]) {
-                        sensorValue = data[sensorDataProperty].value;
-                    } else {
-                        console.error('Error: data[' + sensorDataProperty + '] is undefined');
-                        return;
-                    }
+            // Verificar si el tipo de sensor está mapeado
+            var sensorDataProperty = sensorDataProperties[data.type];
+            if (!sensorDataProperty) {
+                console.error('Error: Tipo de sensor no reconocido:', data.type);
+                return;
+            }
 
-                    cell1.innerHTML = new Date().toLocaleString();
-                    cell2.innerHTML = sensorValue;
-                },
-                error: function (error) {
-                    console.error('Error al obtener datos del sensor:', error);
-                }
-            });
+            var sensorValue = data[sensorDataProperty] ? data[sensorDataProperty].value : 'Valor no disponible';
+
+            cell1.innerHTML = new Date().toLocaleString();
+            cell2.innerHTML = sensorValue;
+        },
+        error: function (error) {
+            console.error('Error al obtener datos del sensor:', error);
         }
+    });
+}
+
 
         // Obtén el intervalo de la URL, o usa un valor predeterminado si no se proporciona
         var urlParams = new URLSearchParams(window.location.search);

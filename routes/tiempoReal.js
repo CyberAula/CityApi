@@ -17,10 +17,10 @@ const sensorValueProperties = {
     'https://uri.fiware.org/ns/data-models#Light': 'https://uri.fiware.org/ns/data-models#stateLight',
     'https://uri.fiware.org/ns/data-models#EngineDC': 'https://uri.fiware.org/ns/data-models#velocityEngine',
     'https://uri.fiware.org/ns/data-models#Camera': 'https://uri.fiware.org/ns/data-models#on'
-};
+}; 
 
 //obtención de datos en tiempo real del Context Broker
-async function obtenerDatoEnTiempoReal(numid) {
+async function obtenerDatoEnTiempoReal(numid, simple = false) {
     let nombre;
     let urn;
     let unidad;
@@ -101,14 +101,17 @@ async function obtenerDatoEnTiempoReal(numid) {
 
     try {
         const response = await axios.get(`http://localhost:1026/v2/entities/${urn}`);
-        // Opción 1: Se obtiene el objeto completo en tiempo real
-        return response.data;
-        /* Opción 2: Se obtiene solo el nombre y el valor del sensor en tiempo real
         const data = response.data;
-        const sensorType = data.type;
-        const valueProperty = sensorValueProperties[sensorType];
-        const valor = data[valueProperty].value;
-        return `Este es el ${nombre}, valor actual: ${valor} ${unidad}`;*/
+        if (!simple) {
+            // Devuelve el objeto completo si simple es false
+            return data;
+        } else {
+            // Devuelve el mensaje simple si simple es true
+            const sensorType = data.type;
+            const valueProperty = sensorValueProperties[sensorType];
+            const valor = data[valueProperty].value;
+            return `Este es el ${nombre}, valor actual: ${valor} ${unidad}`;
+        }
     } catch (error) {
         console.error(error);
         return 'Hubo un error al obtener los datos del sensor.';
@@ -121,7 +124,7 @@ async function obtenerDatoEnTiempoReal(numid) {
  *   get:
  *     tags:
  *       - Tiempo Real
- *     summary: Obtener datos en tiempo real de un sensor.
+ *     summary: Datos en tiempo real de un sensor
  *     description: Obtiene los datos en tiempo real de un sensor específico.
  *     parameters:
  *       - in: path
@@ -140,5 +143,32 @@ router.get('/tiempoReal/sensores/:numid', async (req, res) => {
         res.status(400).send('¡Este índice no corresponde a ningún sensor!');
     }
 });
+
+/**
+ * @swagger
+ * /tiempoReal/sensores/{numid}/simple:
+ *   get:
+ *     tags:
+ *       - Tiempo Real
+ *     summary: Mensaje simple de datos del sensor
+ *     description: Obtiene un mensaje simple con los datos en tiempo real de un sensor específico.
+ *     parameters:
+ *       - in: path
+ *         name: numid
+ *         required: true
+ *         description: El ID del sensor.
+ *         schema:
+ *           type: string
+ */
+router.get('/tiempoReal/sensores/:numid/simple', async (req, res) => {
+    const numid = req.params.numid;
+    const dato = await obtenerDatoEnTiempoReal(numid, true); // true para indicar que queremos el mensaje simple
+    if (dato) {
+        res.send(dato);
+    } else {
+        res.status(400).send('¡Este índice no corresponde a ningún sensor!');
+    }
+});
+
 
 module.exports = router;

@@ -19,7 +19,7 @@ var temperaturaController = require('../controllers/tempController.js');
  *             schema:
  *               $ref: '#/components/schemas/Temperatura'
  */
-router.get('/sensores/:sensor_id/temp&humd', temperaturaController.getTemperatura);
+router.get('/sensores/1/temperatura', temperaturaController.getTemperatura);
 
 /**
  * @swagger
@@ -63,48 +63,5 @@ router.get('/sensores/:sensor_id/temp&humd', temperaturaController.getTemperatur
  *               $ref: '#/components/schemas/Temperatura'
  */
 router.get('/sensores/:sensor_id', temperaturaController.getMinAndMaxTemp);
-
-/**
- * @swagger
- * /sensores/{sensor_id}?propiedad=humd&min={min}&max={max}:
- *   get:
- *     tags:
- *       - Humedad
- *     summary: Devuelve la humedad en un rango especificado.
- *     description: "Ejemplo de uso: /sensores/1?propiedad=humd&min=10&max=20"
- *     parameters:
- *       - in: path
- *         name: sensor_id
- *         required: true
- *         description: ID del sensor.
- *         schema:
- *           type: integer
- *       - in: query
- *         name: propiedad
- *         required: true
- *         description: Propiedad de la humedad (humidity).
- *         schema:
- *           type: string
- *       - in: query
- *         name: min
- *         required: true
- *         description: Valor mínimo del rango.
- *         schema:
- *           type: number
- *       - in: query
- *         name: max
- *         required: true
- *         description: Valor máximo del rango.
- *         schema:
- *           type: number
- *     responses:
- *       200:
- *         description: La humedad en un rango de valores.
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Temperatura'
- */
-router.get('/sensores/:sensor_id', temperaturaController.getMinAndMaxHumidity);
 
 module.exports = router;

@@ -1,9 +1,9 @@
-// models/Temperatura.js
+//models/Luz.js
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-//esquema de los datos de la temperatura
-const temperaturaSchema = new Schema({
+//esquema de los datos de la luz
+const luzSchema = new Schema({
   id: String,
   type: String,
   subscriptionId: String,
@@ -26,13 +26,12 @@ const temperaturaSchema = new Schema({
           },
           object: String
         },
-        temperature: {
+        stateLight: {
           type: {
             type: String,
             default: "Property"
           },
-          value: Number,
-          unitCode: String 
+          value: String
         }
       }
   }]
@@ -40,4 +39,4 @@ const temperaturaSchema = new Schema({
   versionKey: false
 });
   
-module.exports = mongoose.model('Temperatura', temperaturaSchema, 'sth_urn_ngsi-ld_TemperatureSensor_001');
+module.exports = mongoose.model('Luz', luzSchema, 'sth_urn_ngsi-ld_Light_001');

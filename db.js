@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const dbname = "Datos";
+const dbname = "sth_openiot";
 const dbURI = 'mongodb://localhost:27017/' + dbname;
 
 const connectDB = async () => {

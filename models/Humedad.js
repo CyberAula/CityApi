@@ -1,9 +1,9 @@
-// models/Temperatura.js
+//models/Humedad.js
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-//esquema de los datos de la temperatura
-const temperaturaSchema = new Schema({
+//esquema de los datos de la humedad
+const humedadSchema = new Schema({
   id: String,
   type: String,
   subscriptionId: String,
@@ -26,7 +26,7 @@ const temperaturaSchema = new Schema({
           },
           object: String
         },
-        temperature: {
+        humidity: {
           type: {
             type: String,
             default: "Property"
@@ -40,4 +40,4 @@ const temperaturaSchema = new Schema({
   versionKey: false
 });
   
-module.exports = mongoose.model('Temperatura', temperaturaSchema, 'sth_urn_ngsi-ld_TemperatureSensor_001');
+module.exports = mongoose.model('Humedad', humedadSchema, 'sth_urn_ngsi-ld_HumiditySensor_001');
