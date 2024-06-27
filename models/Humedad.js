@@ -7,7 +7,7 @@ const humedadSchema = new Schema({
   id: String,
   type: String,
   subscriptionId: String,
-  notifiedAt: Date,
+  notifiedAt: String,
   data: [{
       Object: {
         id: String,

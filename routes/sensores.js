@@ -64,6 +64,30 @@ router.get('/sensores', sensoresController.getSensoresData);
  *             schema:
  *               $ref: '#/components/schemas/Sensores'
  */
-router.get('/sensores/:numid', sensoresController.getSensorData);
+router.get('/sensores/:numid(\\d+)', sensoresController.getSensorData);
+
+/**
+ * @swagger
+ * /sensores/{edificio}:
+ *   get:
+ *     tags:
+ *       - Sensores
+ *     summary: Devuelve los datos de los sensores filtrados por edificio.
+ *     parameters:
+ *       - in: path
+ *         name: edificio
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: El nombre del edificio para filtrar los datos de los sensores.
+ *     responses:
+ *       200:
+ *         description: Los datos de los sensores filtrados por edificio.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Sensores'
+ */
+router.get('/sensores/:edificio', sensoresController.getSensorData);
 
 module.exports = router;

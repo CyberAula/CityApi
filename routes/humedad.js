@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var temperaturaController = require('../controllers/tempController.js');
+var humController = require('../controllers/humController.js');
 
 /**
  * @swagger
@@ -19,6 +19,6 @@ var temperaturaController = require('../controllers/tempController.js');
  *             schema:
  *               $ref: '#/components/schemas/Temperatura'
  */
-router.get('/sensores/1/temperatura', temperaturaController.getTemperatura);
+router.get('/sensores/2/humedad', humController.getHumedad);
 
 module.exports = router;

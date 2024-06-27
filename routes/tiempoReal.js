@@ -36,8 +36,8 @@ async function obtenerDatoEnTiempoReal(numid, simple = false) {
             unidad = "%";
             break;
         case '3':
-            urn = "urn:ngsi-ld:Servmotor:001";
-            nombre = "sensor servomotor";
+            urn = "urn:ngsi-ld:EngineDC:001";
+            nombre = "sensor motor DC";
             unidad = "";
             break;
         case '4':
@@ -66,8 +66,8 @@ async function obtenerDatoEnTiempoReal(numid, simple = false) {
             unidad = "";
             break;
         case '9':
-            urn = "urn:ngsi-ld:SwitchSensor:001";
-            nombre = "sensor switch";
+            urn = "urn:ngsi-ld:Light:001";
+            nombre = "sensor de luz";
             unidad = "";
             break;
         case '10':
@@ -81,13 +81,13 @@ async function obtenerDatoEnTiempoReal(numid, simple = false) {
             unidad = "";
             break;
         case '12':
-            urn = "urn:ngsi-ld:Light:001";
-            nombre = "sensor de luz";
+            urn = "urn:ngsi-ld:SwitchSensor:001";
+            nombre = "sensor switch";
             unidad = "";
             break;
         case '13':
-            urn = "urn:ngsi-ld:EngineDC:001";
-            nombre = "sensor motor DC";
+            urn = "urn:ngsi-ld:Servmotor:001";
+            nombre = "sensor servomotor";
             unidad = "";
             break;
         case '14':

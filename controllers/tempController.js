@@ -12,20 +12,7 @@ exports.getTemperatura = async function (req, res, next) {
   }
 };
 
-//función para obtener la temperatura de un sensor específico en un rango
-exports.getMinAndMaxTemp = async function (sensor_id, min, max) {
-  
-  //validar los valores min y max
-  if (isNaN(min) || isNaN(max)) {
-    throw new Error('Los valores min y max proporcionados son inválidos');
-  }
 
-  var temperaturas = await Temperatura.find({
-    'temperature.value': { $gte: min, $lte: max }
-  });
 
-  console.log(temperaturas); 
-  return temperaturas; 
 
-}
 

@@ -3,47 +3,46 @@ const Humedad = require('../models/Humedad');
 const MotorDC = require('../models/MotorDC');
 const Ultrasonido = require('../models/Ultrasonido');
 const Fotorresistor = require('../models/Fotorresistor');
-const Potenciometro = require('../models/Potenciometro');
 const createError = require('http-errors');
 
-exports.filterByOrden = async function (collectionName, orden) {
-    let order = orden === 'ascendente' ? 1 : -1;
+exports.filterByRango = async function (collectionName, min, max) {
+
     let result;
     switch (collectionName) {
         case 'sth_urn_ngsi-ld_TemperatureSensor_001':
             result = await Temperatura.aggregate([
                 { $unwind: "$data" },
-                { $sort: { "data.temperature.value": order } }
+                { $match: { "data.temperature.value": { $gte: parseFloat(min), $lte: parseFloat(max) } } }
             ]);
             break;
         case 'sth_urn_ngsi-ld_HumiditySensor_001':
             result = await Humedad.aggregate([
                 { $unwind: "$data" },
-                { $sort: { "data.humidity.value": order } }
+                { $match: { "data.humidity.value": { $gte: parseFloat(min), $lte: parseFloat(max) } } }
             ]);
             break;
         case 'sth_urn_ngsi-ld_EngineDC_001':
             result = await MotorDC.aggregate([
                 { $unwind: "$data" },
-                { $sort: { "data.velocityEngine.value": order } }
+                { $match: { "data.velocityEngine.value": { $gte: parseFloat(min), $lte: parseFloat(max) } } }
             ]);
             break;
         case 'sth_urn_ngsi-ld_UltrasoundSensor_001':
             result = await Ultrasonido.aggregate([
                 { $unwind: "$data" },
-                { $sort: { "data.distance.value": order } }
+                { $match: { "data.distance.value": { $gte: parseFloat(min), $lte: parseFloat(max) } } }
             ]);
             break;
         case 'sth_urn_ngsi-ld_PhotoresistorSensor_001':
             result = await Fotorresistor.aggregate([
                 { $unwind: "$data" },
-                { $sort: { "data.light.value": order } }
+                { $match: { "data.light.value": { $gte: parseFloat(min), $lte: parseFloat(max) } } }
             ]);
             break;
         case 'sth_urn_ngsi-ld_PotentiometerSensor_001':
             result = await Potenciometro.aggregate([
                 { $unwind: "$data" },
-                { $sort: { "data.velocityControl.value": order } }
+                { $sort: { "data.velocityControl.value": { $gte: parseFloat(min), $lte: parseFloat(max) } } }
             ]);
             break;
         case 'sth_urn_ngsi-ld_PirSensor_001':

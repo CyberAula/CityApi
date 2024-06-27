@@ -1,16 +1,16 @@
 var express = require('express');
 var router = express.Router();
 
-var railController = require('../controllers/railController.js');
+var InfrarrojosController = require('../controllers/InfrarrojosController.js');
 
 /**
  * @swagger
- * /sensores/{sensor_id}/railes:
+ * /sensores/{sensor_id}/Infrarrojoses:
  *   get:
  *     tags:
  *       - Raíl
  *     summary: Devuelve los datos registrados del conmutador del raíl.
- *     description: "Ejemplo de uso: /sensores/2/railes"
+ *     description: "Ejemplo de uso: /sensores/2/Infrarrojoses"
  *     responses:
  *       200:
  *         description: Información del conmutador y el servomotor de la ciudad.
@@ -19,7 +19,7 @@ var railController = require('../controllers/railController.js');
  *             schema:
  *               $ref: '#/components/schemas/Raíl'
  */
-router.get('/sensores/:sensor_id/railes', railController.getRailes);
+router.get('/sensores/:sensor_id/Infrarrojoses', InfrarrojosController.getInfrarrojoses);
 
 /**
  * @swagger
@@ -50,6 +50,6 @@ router.get('/sensores/:sensor_id/railes', railController.getRailes);
  *             schema:
  *               $ref: '#/components/schemas/Raíl'
  */
-router.get('/sensores/:sensor_id', railController.getEstadoRail);
+router.get('/sensores/:sensor_id', InfrarrojosController.getEstadoInfrarrojos);
 
 module.exports = router;
