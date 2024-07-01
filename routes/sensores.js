@@ -97,6 +97,7 @@ router.get('/sensores/:numid(\\d+)', sensoresController.getSensorData);
  *     tags:
  *       - Sensores
  *     summary: Devuelve los datos de los sensores filtrados por edificio.
+ *     description: "Ejemplo de uso: /sensores/tiempo que devuelve los datos de los sensores para un edificio específico."
  *     parameters:
  *       - in: path
  *         name: edificio
@@ -106,11 +107,20 @@ router.get('/sensores/:numid(\\d+)', sensoresController.getSensorData);
  *         description: El nombre del edificio para filtrar los datos de los sensores.
  *     responses:
  *       200:
- *         description: Los datos de los sensores filtrados por edificio.
+ *         description: Los datos de los sensores filtrados por edificio, incluyendo temperatura y humedad.
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Temperatura'
+ *               type: object
+ *               properties:
+ *                 temperatura:
+ *                   $ref: '#/components/schemas/Temperatura'
+ *                 humedad:
+ *                   $ref: '#/components/schemas/Humedad'
+ *       400:
+ *         description: Solicitud incorrecta, posiblemente debido a un formato de edificio inválido.
+ *       404:
+ *         description: Edificio no encontrado o sin sensores disponibles.
  */
 router.get('/sensores/:edificio', sensoresController.getSensorData);
 
