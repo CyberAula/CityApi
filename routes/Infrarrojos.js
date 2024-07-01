@@ -1,55 +1,31 @@
 var express = require('express');
 var router = express.Router();
 
-var InfrarrojosController = require('../controllers/InfrarrojosController.js');
+var infrarrojosController = require('../controllers/infrarrojosController.js');
 
 /**
  * @swagger
- * /sensores/{sensor_id}/Infrarrojoses:
+ * /sensores/{numid}/infrarrojos:
  *   get:
  *     tags:
  *       - Raíl
  *     summary: Devuelve los datos registrados del conmutador del raíl.
- *     description: "Ejemplo de uso: /sensores/2/Infrarrojoses"
- *     responses:
- *       200:
- *         description: Información del conmutador y el servomotor de la ciudad.
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Raíl'
- */
-router.get('/sensores/:sensor_id/Infrarrojoses', InfrarrojosController.getInfrarrojoses);
-
-/**
- * @swagger
- * /sensores/{sensor_id}?estado={estado}:
- *   get:
- *     tags:
- *       - Raíl
- *     summary: Devuelve los datos del conmutador y servomotor según el estado especificado.
- *     description: "Ejemplo de uso: /sensores/2?estado=1"
+ *     description: "Ejemplo de uso: /sensores/8/infrarrojos"
  *     parameters:
  *       - in: path
- *         name: sensor_id
+ *         name: numid
  *         required: true
- *         description: ID del sensor
  *         schema:
  *           type: integer
- *       - in: query
- *         name: estado
- *         required: true
- *         description: Estado especificado
- *         schema:
- *           type: integer
+ *         description: Identificador numérico del sensor.
  *     responses:
  *       200:
- *         description: Datos del conmutador y servomotor según el estado especificado.
+ *         description: Informa si hay un tren pasando (HIGH) o no (LOW).
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Raíl'
+ *               $ref: '#/components/schemas/Infrarrojos'
  */
-router.get('/sensores/:sensor_id', InfrarrojosController.getEstadoInfrarrojos);
+router.get('/sensores/:numid(\\d+)/infrarrojos', infrarrojosController.getInfrarrojos);
 
 module.exports = router;

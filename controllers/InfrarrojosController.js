@@ -1,24 +1,23 @@
 var Infrarrojos = require('../models/Infrarrojos.js');
 
 //función para obtener todos los datos de los trenes
-exports.getInfrarrojoses = async function (req, res, next) {
-    try {
-      var Infrarrojoses = await Infrarrojos.find({});
-      console.log(Infrarrojoses); 
-      res.json(Infrarrojoses); 
-    } catch (error) {
+exports.getInfrarrojos = async function (req, res, next) {
+  try {
+      // Asumiendo que el numid se pasa como un parámetro de ruta
+      const numid = parseInt(req.params.numid); // Obtener numid de los parámetros de ruta
+
+      // Verificar si numid es 8
+      if (numid !== 8) {
+          return res.status(400).send({ error: 'numid incorrecto, debe ser 8 para infrarrojos.' });
+      }
+
+      // Obtener los datos de infrarrojos
+      var infrarrojos = await Infrarrojos.find({});
+      console.log(infrarrojos); 
+      res.json(infrarrojos); 
+  } catch (error) {
       console.error(error); 
       next(error); 
-    }
+  }
 };
 
-//función para obtener el estado de un Infrarrojos específico
-exports.getEstadoInfrarrojos = async function (sensor_id, commuterValue) {
-    var Infrarrojoses = await Infrarrojos.find({
-      sensor_id: sensor_id,
-      'commuter.value': commuterValue
-    });
-  
-    console.log(Infrarrojoses); 
-    return Infrarrojoses; 
-  }

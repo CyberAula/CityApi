@@ -14,205 +14,395 @@ const options = {
             type: 'object',
             properties: {
               numid: {
-                type: 'number',
-                example: '3',
-                description: 'El índice del sensor'
+                type: 'string',
+                example: 'urn:ngsi-ld:TemperatureSensor:001',
+                description: 'Identificador único del sensor de temperatura'
               },
               name: {
                 type: 'string',
-                example: 'Temperatura y Humedad',
-                description: 'El nombre del sensor'
+                example: 'TemperatureSensor',
+                description: 'El nombre del sensor de temperatura'
               },
               collectionName: {
                 type: 'string',
-                example: 'Hygrothermograph',
-                description: 'Colección a la que pertenece el sensor.'
+                example: 'sth_urn_ngsi-ld_TemperatureSensor_001',
+                description: 'Colección a la que pertenece el sensor de temperatura.'
               },
               allowed_params: {
-                type: '[string]',
-                example: '["propiedad", "min", "max"]',
+                type: 'array',
+                items: {
+                  type: 'string'
+                },
+                example: [],
                 description: 'Parámetros permitidos en su query.'
-              },
-              desc: {
-                type: 'string',
-                example: 'El higrotermógrafo es una herramienta importante para darnos datos sobre la temperatura y la humedad de nuestro ambiente. Aquí  utilizaremos la raspberry  Pi para leer los datos de Temperatura y Humedad del Módulo DHT11.',
-                description: 'La descripción del sensor'
               },
               uso: {
                 type: 'string',
-                example: 'Medir temperatura y humedad en la sala',
-                description: 'Para qué se va a utilizar el sensor.'
+                example: 'Medir la temperatura en la ciudad LEGO, con datos tomados de la API de Madrid.',
+                description: 'Para qué se va a utilizar el sensor de temperatura.'
               },
               exampleQueryDateRange: {
                 type: 'string',
                 example: '/sensores/1?desde=2024-05-06T22:53:14.205Z&hasta=2024-05-07T01:12:15.758Z',
-                description: 'Ejemplo de consulta de rango de fechas'
+                description: 'Ejemplo de consulta de rango de fechas para el sensor de temperatura'
               },
               visible: {
                 type: 'string',
                 example: 'true',
-                description: 'La visibilidad del sensor'
-              },
-              realtime: {
-                type: 'string',
-                example: 'true',
-                description: 'Indica si el sensor ofrece datos en tiempo real o no.'
-              },
+                description: 'La visibilidad del sensor de temperatura'
+              }
             }
           },
           Temperatura: {
             type: 'object',
             properties: {
-              sensor_id: {
-                type: 'number',
-                example: 1,
-                description: 'El índice del sensor'
-              },
-              nombre_sensor: {
+              id: {
                 type: 'string',
-                example: 'Sensor Temperatura y Humedad',
-                description: 'El nombre del sensor.'
+                description: 'Identificador único del objeto'
               },
-              temp: {
-                type: 'object',
-                properties: {
-                  type: {
-                    type: 'string',
-                    default: 'Property'
-                  },
-                  value: {
-                    type: 'number',
-                    example: 22.5,
-                    description: 'La temperatura en grados Celsius'
-                  }
-                }
+              type: {
+                type: 'string',
+                description: 'Tipo del objeto'
               },
-              humidity: {
-                type: 'object',
-                properties: {
-                  type: {
-                    type: 'string',
-                    default: 'Property'
-                  },
-                  value: {
-                    type: 'number',
-                    example: 65,
-                    description: 'La humedad en porcentaje'
-                  }
-                }
+              subscriptionId: {
+                type: 'string',
+                description: 'Identificador de la suscripción'
               },
-              fecha: {
+              notifiedAt: {
                 type: 'string',
                 format: 'date-time',
-                example: '2024-05-08T08:31:44.173Z',
-                description: 'La fecha y hora cuando se tomaron los datos'
+                description: 'Fecha y hora de la notificación'
+              },
+              data: {
+                type: 'array',
+                items: {
+                  type: 'object',
+                  properties: {
+                    Object: {
+                      type: 'object',
+                      properties: {
+                        id: {
+                          type: 'string',
+                          description: 'Identificador único del sensor o dispositivo'
+                        },
+                        type: {
+                          type: 'string',
+                          description: 'Tipo del sensor o dispositivo'
+                        },
+                        category: {
+                          type: 'object',
+                          properties: {
+                            type: {
+                              type: 'string',
+                              default: 'Property',
+                              description: 'Tipo de la propiedad category'
+                            },
+                            value: {
+                              type: 'string',
+                              description: 'Valor de la categoría'
+                            }
+                          }
+                        },
+                        controlledAsset: {
+                          type: 'object',
+                          properties: {
+                            type: {
+                              type: 'string',
+                              default: 'Relationship',
+                              description: 'Tipo de la relación controlledAsset'
+                            },
+                            object: {
+                              type: 'string',
+                              description: 'Objeto de la relación'
+                            }
+                          }
+                        },
+                        temperature: {
+                          type: 'object',
+                          properties: {
+                            type: {
+                              type: 'string',
+                              default: 'Property',
+                              description: 'Tipo de la propiedad temperature'
+                            },
+                            value: {
+                              type: 'number',
+                              description: 'Valor numérico de la temperatura'
+                            },
+                            unitCode: {
+                              type: 'string',
+                              description: 'Código de la unidad de medida de la temperatura'
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  description: 'Datos del objeto'
+                }
               }
-            },
+            }
           },
-          Raíl: {
+          Humedad: {
             type: 'object',
             properties: {
-              commuter: {
-                type: 'object',
-                properties: {
-                  type: {
-                    type: 'string',
-                    default: 'Property'
-                  },
-                  value: {
-                    type: 'number',
-                    example: 2,
-                    description: 'La frecuencia del tren'
-                  }
-                }
-              },
-              sensor_id: {
-                type: 'number',
-                example: 2,
-                description: 'El índice del sensor'
-              },
-              nombre_sensor: {
+              id: {
                 type: 'string',
-                example: 'Conmutador y Servomotor',
-                description: 'El nombre del sensor'
+                description: 'Identificador único del objeto'
               },
-              fecha: {
+              type: {
+                type: 'string',
+                description: 'Tipo del objeto'
+              },
+              subscriptionId: {
+                type: 'string',
+                description: 'Identificador de la suscripción'
+              },
+              notifiedAt: {
                 type: 'string',
                 format: 'date-time',
-                example: '2024-05-08T12:29:05.464Z',
-                description: 'La fecha y hora cuando se tomaron los datos'
+                description: 'Fecha y hora de la notificación'
+              },
+              data: {
+                type: 'array',
+                items: {
+                  type: 'object',
+                  properties: {
+                    Object: {
+                      type: 'object',
+                      properties: {
+                        id: {
+                          type: 'string',
+                          description: 'Identificador único del sensor o dispositivo'
+                        },
+                        type: {
+                          type: 'string',
+                          description: 'Tipo del sensor o dispositivo'
+                        },
+                        category: {
+                          type: 'object',
+                          properties: {
+                            type: {
+                              type: 'string',
+                              default: 'Property',
+                              description: 'Tipo de la propiedad category'
+                            },
+                            value: {
+                              type: 'string',
+                              description: 'Valor de la categoría'
+                            }
+                          }
+                        },
+                        controlledAsset: {
+                          type: 'object',
+                          properties: {
+                            type: {
+                              type: 'string',
+                              default: 'Relationship',
+                              description: 'Tipo de la relación controlledAsset'
+                            },
+                            object: {
+                              type: 'string',
+                              description: 'Objeto de la relación'
+                            }
+                          }
+                        },
+                        humidity: {
+                          type: 'object',
+                          properties: {
+                            type: {
+                              type: 'string',
+                              default: 'Property',
+                              description: 'Tipo de la propiedad temperature'
+                            },
+                            humidity: {
+                              type: 'number',
+                              description: 'Valor numérico de la temperatura'
+                            },
+                            unitCode: {
+                              type: 'string',
+                              description: 'Código de la unidad de medida de la temperatura'
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  description: 'Datos del objeto'
+                }
               }
-            },
+            }
           },
           Ultrasonido: {
             type: 'object',
             properties: {
-              ultasonic: {
-                type: 'object',
-                properties: {
-                  type: {
-                    type: 'string',
-                    default: 'Property'
-                  },
-                  value: {
-                    type: 'number',
-                    example: 458.76,
-                    description: 'La distancia entre dos elementos en metros'
-                  }
-                }
-              },
-              sensor_id: {
-                type: 'number',
-                example: 3,
-                description: 'El índice del sensor'
-              },
-              nombre_sensor: {
+              id: {
                 type: 'string',
-                example: 'Ultrasonido',
-                description: 'El nombre del sensor'
+                description: 'Identificador único del evento de ultrasonido'
               },
-              fecha: {
+              type: {
+                type: 'string',
+                description: 'Tipo de entidad, en este caso, Ultrasonido'
+              },
+              subscriptionId: {
+                type: 'string',
+                description: 'Identificador de la suscripción que generó esta notificación'
+              },
+              notifiedAt: {
                 type: 'string',
                 format: 'date-time',
-                example: '2024-05-08T12:29:05.464Z',
-                description: 'La fecha y hora cuando se tomaron los datos'
+                description: 'Fecha y hora de la notificación'
+              },
+              data: {
+                type: 'array',
+                items: {
+                  type: 'object',
+                  properties: {
+                    id: {
+                      type: 'string',
+                      description: 'Identificador único del objeto relacionado con el evento de ultrasonido'
+                    },
+                    type: {
+                      type: 'string',
+                      description: 'Tipo de objeto relacionado con el evento de ultrasonido'
+                    },
+                    category: {
+                      type: 'object',
+                      properties: {
+                        type: {
+                          type: 'string',
+                          default: 'Property',
+                          description: 'Indica que la categoría es una propiedad'
+                        },
+                        value: {
+                          type: 'string',
+                          description: 'Valor de la categoría del objeto'
+                        }
+                      }
+                    },
+                    controlledAsset: {
+                      type: 'object',
+                      properties: {
+                        type: {
+                          type: 'string',
+                          default: 'Relationship',
+                          description: 'Indica que el activo controlado es una relación'
+                        },
+                        object: {
+                          type: 'string',
+                          description: 'Objeto relacionado con el activo controlado'
+                        }
+                      }
+                    },
+                    distance: {
+                      type: 'object',
+                      properties: {
+                        type: {
+                          type: 'string',
+                          default: 'Property',
+                          description: 'Indica que la distancia es una propiedad'
+                        },
+                        value: {
+                          type: 'number',
+                          description: 'Valor numérico de la distancia medida'
+                        },
+                        unitCode: {
+                          type: 'string',
+                          description: 'Código de la unidad de medida de la distancia'
+                        }
+                      }
+                    }
+                  }
+                },
+                description: 'Datos del evento de ultrasonido'
               }
-            },
+            }
           },
-          Farolas: {
+          Infrarrojos: {
             type: 'object',
             properties: {
-              luminosity: {
-                type: 'object',
-                properties: {
-                  type: {
-                    type: 'string',
-                    default: 'Property'
-                  },
-                  value: {
-                    type: 'number',
-                    example: 30,
-                    description: 'La intensidad de luz en amperios'
-                  }
-                }
-              },
-              sensor_id: {
-                type: 'number',
-                example: 4,
-                description: 'El índice del sensor'
-              },
-              nombre_sensor: {
+              id: {
                 type: 'string',
-                example: 'Fotorresistor',
-                description: 'El nombre del sensor'
+                description: 'Identificador único del objeto'
               },
-              fecha: {
+              type: {
+                type: 'string',
+                description: 'Tipo del objeto'
+              },
+              subscriptionId: {
+                type: 'string',
+                description: 'Identificador de la suscripción'
+              },
+              notifiedAt: {
                 type: 'string',
                 format: 'date-time',
-                example: '2024-05-08T12:29:05.464Z',
-                description: 'La fecha y hora cuando se tomaron los datos'
+                description: 'Fecha y hora de la notificación'
+              },
+              data: {
+                type: 'array',
+                items: {
+                  type: 'object',
+                  properties: {
+                    Object: {
+                      type: 'object',
+                      properties: {
+                        id: {
+                          type: 'string',
+                          description: 'Identificador único del sensor o dispositivo'
+                        },
+                        type: {
+                          type: 'string',
+                          description: 'Tipo del sensor o dispositivo'
+                        },
+                        category: {
+                          type: 'object',
+                          properties: {
+                            type: {
+                              type: 'string',
+                              default: 'Property',
+                              description: 'Tipo de la propiedad category'
+                            },
+                            value: {
+                              type: 'string',
+                              description: 'Valor de la categoría'
+                            }
+                          }
+                        },
+                        controlledAsset: {
+                          type: 'object',
+                          properties: {
+                            type: {
+                              type: 'string',
+                              default: 'Relationship',
+                              description: 'Tipo de la relación controlledAsset'
+                            },
+                            object: {
+                              type: 'string',
+                              description: 'Objeto de la relación'
+                            }
+                          }
+                        },
+                        presence: {
+                          type: 'object',
+                          properties: {
+                            type: {
+                              type: 'string',
+                              default: 'Property',
+                              description: 'Tipo de la propiedad presence'
+                            },
+                            value: {
+                              type: 'string',
+                              description: 'Valor de la presencia'
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  description: 'Datos del objeto'
+                }
               }
-            },
+            }
           },
         },
       },

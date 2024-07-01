@@ -26,12 +26,14 @@ router.get('/sensores', sensoresController.getSensoresData);
  *   get:
  *     tags:
  *       - Sensores
- *     summary: Tres posibles usos, ver descripción.
+ *     summary: Obtiene datos del sensor según los parámetros proporcionados.
  *     description: >
- *       Este endpoint tiene tres usos principales:
+ *       Este endpoint tiene varios usos principales:
  *       1. Si se hace una solicitud GET sin proporcionar ningún parámetro de consulta, se obtendrá la información del sensor con el numid especificado.
- *       2. Si se hace una solicitud GET proporcionando los parámetros de consulta 'desde' y 'hasta', se obtendrán los datos del sensor con el numid especificado que estén dentro del rango de fechas especificado.
- *       3. Si se hace una solicitud GET proporcionando el parámetro de consulta 'orden', se obtendrán los datos del sensor con el numid especificado ordenados según el criterio especificado. Ordena los datos recopilados de la temperatura(1), el ultrasonido(3) y la luminosidad(4).
+ *       2. Si se hace una solicitud GET proporcionando los parámetros de consulta 'desde' y 'hasta', se obtendrán los datos de temperatura del sensor dentro del rango de fechas especificado.
+ *       3. Si se hace una solicitud GET proporcionando el parámetro de consulta 'orden', se obtendrán los datos de temperatura del sensor ordenados según el criterio especificado.
+ *       4. Si se hace una solicitud GET proporcionando los parámetros de consulta 'min' y 'max', se obtendrán los datos de temperatura del sensor dentro del rango especificado.
+ *       5. Si se hace una solicitud GET proporcionando el parámetro de consulta 'estado', se obtendrán los datos del sensor de infrarrojos con el estado especificado.
  *     parameters:
  *       - in: path
  *         name: numid
@@ -44,27 +46,49 @@ router.get('/sensores', sensoresController.getSensoresData);
  *         schema:
  *           type: string
  *           format: date-time
- *         description: La fecha de inicio para filtrar los datos del sensor.
+ *         description: La fecha de inicio para filtrar los datos de temperatura del sensor.
  *       - in: query
  *         name: hasta
  *         schema:
  *           type: string
  *           format: date-time
- *         description: La fecha de fin para filtrar los datos del sensor.
+ *         description: La fecha de fin para filtrar los datos de temperatura del sensor.
  *       - in: query
  *         name: orden
  *         schema:
  *           type: string
- *         description: El criterio de ordenación de los datos del sensor. Puede ser 'ascendente' para orden ascendente o 'descendente' para orden descendente.
+ *         description: El criterio de ordenación de los datos de temperatura del sensor. Puede ser 'ascendente' o 'descendente'.
+ *       - in: query
+ *         name: min
+ *         schema:
+ *           type: number
+ *         description: El valor mínimo para filtrar los datos de temperatura del sensor.
+ *       - in: query
+ *         name: max
+ *         schema:
+ *           type: number
+ *         description: El valor máximo para filtrar los datos de temperatura del sensor.
+ *       - in: query
+ *         name: estado
+ *         schema:
+ *           type: string
+ *         description: El estado para filtrar los datos del sensor de infrarrojos.
  *     responses:
  *       200:
  *         description: Los datos del sensor.
  *         content:
  *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Sensores'
+ *             oneOf:
+ *               - $ref: '#/components/schemas/Sensores'
+ *               - $ref: '#/components/schemas/Temperatura'
+ *               - $ref: '#/components/schemas/Infrarrojos'
+ *       400:
+ *         description: Parámetros de consulta no válidos.
+ *       404:
+ *         description: Sensor no encontrado.
  */
 router.get('/sensores/:numid(\\d+)', sensoresController.getSensorData);
+
 
 /**
  * @swagger
@@ -86,7 +110,7 @@ router.get('/sensores/:numid(\\d+)', sensoresController.getSensorData);
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Sensores'
+ *               $ref: '#/components/schemas/Temperatura'
  */
 router.get('/sensores/:edificio', sensoresController.getSensorData);
 

@@ -3,7 +3,6 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var mongoose = require('mongoose');
 var { swaggerUi, specs } = require('./swagger');
 var connectDB = require('./db.js');
 
@@ -12,9 +11,8 @@ var indexRouter = require('./routes/index');
 var sensoresRouter = require('./routes/sensores');
 var tempRouter = require('./routes/temp');
 var humRouter = require('./routes/humedad');
-var InfrarrojosRouter = require('./routes/Infrarrojos');
+var InfrarrojosRouter = require('./routes/infrarrojos.js');
 var ultrasonidoRouter = require('./routes/ultrasonido');
-var farolasRouter = require('./routes/fotorresistor');
 var tiempoRealRouter = require('./routes/tiempoReal');
 var continuoRouter = require('./routes/continuo');
 
@@ -25,7 +23,7 @@ connectDB().then(() => {
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-app.set('port', process.env.PORT || 5000);
+app.set('port', process.env.PORT || 3000);
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -44,7 +42,6 @@ app.use('/', tempRouter);
 app.use('/', humRouter);
 app.use('/', InfrarrojosRouter);
 app.use('/', ultrasonidoRouter);
-app.use('/', farolasRouter);
 app.use('/', tiempoRealRouter);
 app.use('/', continuoRouter);
 

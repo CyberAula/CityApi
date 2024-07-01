@@ -5,12 +5,19 @@ var temperaturaController = require('../controllers/tempController.js');
 
 /**
  * @swagger
- * /sensores/{sensor_id}/temp&humd:
+ * /sensores/{numid}/temperatura:
  *   get:
  *     tags:
  *       - Temperatura
  *     summary: Devuelve las temperaturas registradas.
- *     description: "Ejemplo de uso: /sensores/1/temp&humd"
+ *     description: "Ejemplo de uso: /sensores/1/temperatura"
+ *     parameters:
+ *       - in: path
+ *         name: numid
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: Identificador numérico del sensor.
  *     responses:
  *       200:
  *         description: La temperatura de la ciudad.
@@ -19,6 +26,6 @@ var temperaturaController = require('../controllers/tempController.js');
  *             schema:
  *               $ref: '#/components/schemas/Temperatura'
  */
-router.get('/sensores/1/temperatura', temperaturaController.getTemperatura);
+router.get('/sensores/:numid(\\d+)/temperatura', temperaturaController.getTemperatura);
 
 module.exports = router;
