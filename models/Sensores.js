@@ -10,4 +10,4 @@ const sensorSchema = new mongoose.Schema({
   visible: String,
 }, { collection: 'sensores' });
 
-module.exports = mongoose.model('Sensore', sensorSchema);
+module.exports = mongoose.model('Sensores', sensorSchema);

@@ -13,13 +13,13 @@ const edificioHelper = require('../helpers/edificioHelper');
 const Sensores = require('../models/Sensores');
 
 //función para obtener los datos de los sensores
-exports.getSensoresData = (req, res, next) => {
-    Sensores.find({}, function (err, sensoresData) {
-        if (err) {
-            return next(err);
-        }
+exports.getSensoresData = async (req, res, next) => {
+    try {
+        const sensoresData = await Sensores.find({});
         res.json(sensoresData);
-    });
+    } catch (err) {
+        next(err); // Llama a `next` con el error para que Express maneje el error
+    }
 };
 
 const sensorMapping = {
@@ -77,6 +77,16 @@ const sensorMapping = {
         numid: "urn:ngsi-ld:LedDetection:001",
         collectionName: "sth_urn_ngsi-ld_LedDetection_001",
         allowed_params: [],
+    },
+    12: {
+        numid: "urn:ngsi-ld:Servmotor:001",
+        collectionName: "sth_urn_ngsi-ld_Servmotor_001",
+        allowed_params: [],
+    },
+    13: {
+        numid: "urn:ngsi-ld:SwitchSensor:001",
+        collectionName: "sth_urn_ngsi-ld_SwitchSensor_001",
+        allowed_params: [],
     }
 };
 
@@ -106,7 +116,7 @@ exports.getSensorData = async function (req, res, next) {
 
             // Si no hay parámetros en la consulta, busca el sensor
             if (Object.keys(req.query).length === 0) {
-                const sensor = await Sensores.findOne({ numid: sensorId });
+                const sensor = await Sensores.findOne({numid: sensorInfo.numid});
                 if (!sensor) {
                     throw createError(404, 'Sensor no encontrado');
                 }

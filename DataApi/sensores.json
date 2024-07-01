@@ -97,5 +97,23 @@
         "uso": "",
         "exampleQueryDateRange": "/sensores/11?desde=2024-05-06T22:53:14.205Z&hasta=2024-05-07T01:12:15.758Z",
         "visible": "true"
-    }
+    },
+    {
+    "numid": "urn:ngsi-ld:Servmotor:001",
+    "name": "RfidSensor",
+    "collectionName": "sth_urn_ngsi-ld_Servmotor_001",
+    "allowed_params": [],
+    "uso": "",
+    "exampleQueryDateRange": "/sensores/12?desde=2024-05-06T22:53:14.205Z&hasta=2024-05-07T01:12:15.758Z",
+    "visible": "true"
+},
+{
+    "numid": "urn:ngsi-ld:SwitchSensor:001",
+    "name": "LedDetectionSensor",
+    "collectionName": "sth_urn_ngsi-ld_SwitchSensor_001",
+    "allowed_params": [],
+    "uso": "",
+    "exampleQueryDateRange": "/sensores/13?desde=2024-05-06T22:53:14.205Z&hasta=2024-05-07T01:12:15.758Z",
+    "visible": "true"
+}
 ]
